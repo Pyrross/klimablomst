@@ -54,7 +54,7 @@ function setup() {
   score = string.split(" ");
   print(score);
   });
-  
+
   flowerImg = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/testBlomst.jpg?alt=media&token=6033f3af-80f1-4a57-88a4-75af12524357");
   backImg = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/tilbage.png?alt=media&token=351e1dd3-ee90-44ae-963c-c0f104034546");
 
@@ -66,21 +66,21 @@ function setup() {
 
     for(let i = 0; i < numFlowers; i++) {
 
-      locations.push(createVector(((i%5+1))/6,(ceil((i+1)/5)+0.5)/5));
-      let loc = createVector(locations[i].x*width,locations[i].y*height);
+      locations.push(createVector(((i % 5 + 1)) / 6, (ceil((i + 1) / 5) + 0.5) / 5));
+      let loc = createVector(locations[i].x * width, locations[i].y * height);
 
-      flowers.push(new Flower(loc,scaling, 50, 'Flower ' + (1+i)));
+      flowers.push(new Flower(loc, scaling, 50, 'Flower ' + (1 + i)));
 
     }
   } else {
-    scaling = height/(1+numFlowers);
+    scaling = height / ( 1 + numFlowers);
 
     for(let i = 0; i < numFlowers; i++) {
 
-      locations.push(createVector((i+1)/(numFlowers+1),1/2));
-      let loc = createVector(locations[i].x*width,locations[i].y*height);
+      locations.push(createVector((i + 1)/(numFlowers + 1), 1 / 2));
+      let loc = createVector(locations[i].x * width, locations[i].y * height);
 
-      flowers.push(new Flower(loc,scaling, 50, 'Flower ' + (1+i)));
+      flowers.push(new Flower(loc, scaling, 50, 'Flower ' + (1+i)));
 
     }
 
@@ -100,27 +100,27 @@ function draw() {
   background(250);
 
   if(site == 'main') {
-    textSize(height*0.09);
+    textSize(height * 0.09);
     textAlign(LEFT, TOP);
     textFont(myFont);
-    text('Your Garden', 30,30);
+    text('Your Garden', 30, 30);
 
     textFont('Arial');
-    textSize(height*0.03);
+    textSize(height * 0.03);
 
     for(let i = 0; i < numFlowers; i++){
-      let loc = createVector(locations[i].x*width,locations[i].y*height);
-      flowers[i].update(loc,scaling, 50);
+      let loc = createVector(locations[i].x * width, locations[i].y * height);
+      flowers[i].update(loc, scaling, 50);
       flowers[i].display(flowerImg);
 
     }
   }
   for (let i = 0; i < flowers.length; i++) {
     if(site == flowers[i].name) {
-	    let loc = createVector(width/2,height/2);
+	    let loc = createVector(width / 2, height / 2);
 
-      textSize(height*0.05);
-    	flowers[i].update(loc, height*0.6, 50);
+      textSize(height * 0.05);
+    	flowers[i].update(loc, height * 0.6, 50);
     	flowers[i].display(flowerImg);
 
     	backbutton.run();
