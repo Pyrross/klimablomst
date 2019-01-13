@@ -80,7 +80,7 @@ function setup() {
       locations.push(createVector((i + 1)/(numFlowers + 1), 1 / 2));
       let loc = createVector(locations[i].x * width, locations[i].y * height);
 
-      flowers.push(new Flower(loc, scaling, 50, 'Flower ' + (1+i)));
+      flowers.push(new Flower(loc, scaling, 50, 'Flower ' + (1 + i)));
 
     }
 
