@@ -73,7 +73,7 @@ function setup() {
 
     }
   } else {
-    scaling = height / ( 1 + numFlowers);
+    scaling = height / (1 + numFlowers);
 
     for(let i = 0; i < numFlowers; i++) {
 
