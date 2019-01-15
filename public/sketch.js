@@ -100,7 +100,7 @@ function draw() {
     textSize(height * 0.09);
     textAlign(LEFT, TOP);
     textFont(myFont);
-    text('Your Garden', 30, 30);
+    text('Din Blomsterhave', 30, 30);
 
     textFont('Arial');
     textSize(height * 0.03);
