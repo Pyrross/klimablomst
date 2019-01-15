@@ -8,6 +8,7 @@ from firebase_admin import auth, credentials, db, storage
 name = "Blomst3a1"
 score = 0
 level = 1
+CO2 = 0
 
 # Sensor type and pin
 sensor = Adafruit_DHT.DHT11
