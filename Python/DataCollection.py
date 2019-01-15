@@ -24,6 +24,29 @@ root = db.reference()
 # Tilføjer ny blomst hvis ikke den eksisterer i forvejen.
 klient = root.child(name)
 
+
+def calculateChange(temperature, CO2):
+    change = 0
+    if (temperature < 25 and temperature > 20 and temperature != 0):
+        change = change + 1
+    if (temperature > 25 and temperature < 20 and temperature != 0):
+        change = change - 1
+
+    if (CO2 < 40 and CO2 != 0):
+        change = change + 1
+
+    if (CO2 > 40):
+        change = change - 1
+    return change
+
+def updateDatabase(score, temperature, humidity):
+    # Update database
+    klient.child(strftime("%Y%m%d%H%M%S", gmtime())).set({
+        'temperature': temperature,
+        'humidity': humidity,
+        'score': score
+    })
+
 while True:  # Uendeligt loop som opdaterer databasen hvert femte minut (5 * 3600 sekunder)
 
     # Måling af temp og humid
@@ -40,26 +63,3 @@ while True:  # Uendeligt loop som opdaterer databasen hvert femte minut (5 * 360
     updateDatabase(score, temperature, humidity)
 
     time.sleep(5)
-
-def calculateChange(temperature, CO2):
-    change = 0
-    if (temperature < 25 and temperature > 20 and temperature != 0):
-        change = change + 1
-    if (temperature > 25 and temperature < 20 and temperature != 0):
-        change = change - 1
-
-    if (CO2 < 40 and CO2 != 0):
-        change = change + 1
-
-    if (CO2 > 40):
-        change = change - 1
-    return change
-
-
-def updateDatabase(score, temperature, humidity):
-    # Update database
-    klient.child(strftime("%Y%m%d%H%M%S", gmtime())).set({
-        'temperature': temperature,
-        'humidity': humidity,
-        'score': score
-    })
