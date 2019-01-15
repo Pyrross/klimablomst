@@ -11,7 +11,6 @@ var locations = [];
 var flowerImg;
 var backImg;
 
-
 var backbutton;
 
 var site;
@@ -70,25 +69,17 @@ function setup() {
       let loc = createVector(locations[i].x * width, locations[i].y * height);
 
       flowers.push(new Flower(loc, scaling, 50, 'Flower ' + (1 + i)));
-
     }
   } else {
     scaling = height / (1 + numFlowers);
-
     for(let i = 0; i < numFlowers; i++) {
 
       locations.push(createVector((i + 1)/(numFlowers + 1), 1 / 2));
       let loc = createVector(locations[i].x * width, locations[i].y * height);
 
       flowers.push(new Flower(loc, scaling, 50, 'Flower ' + (1 + i)));
-
     }
-
   }
-
-
-
-
   backbutton = new Backbutton(backImg);
 
   site = 'main';
@@ -128,6 +119,7 @@ function draw() {
       textSize(height * 0.05);
     	flowers[i].update(loc, height * 0.6, 50, 1);
     	flowers[i].display(flowerImg);
+      text('Level ' + flowers[i].level, flowers[i].location.x, flowers[i].location.y + 35 + flowers[i].scaling/ 2);
 
     	backbutton.run();
 
@@ -147,7 +139,6 @@ function mouseReleased() {
       	site = flowers[i].name;
       	print(flowers[i].name);
     }
-
   }
 }
 
