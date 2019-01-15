@@ -8,8 +8,6 @@ from firebase_admin import auth, credentials, db, storage
 name = "Blomst3a1"
 score = 0
 level = 1
-CO2 = 0
-temperature = 0
 
 # Sensor type and pin
 sensor = Adafruit_DHT.DHT11
@@ -36,7 +34,6 @@ def calculateChange(temperature, CO2):
 
     if (CO2 < 40 and CO2 != 0):
         change = change + 1
-
     if (CO2 > 40):
         change = change - 1
     return change
@@ -66,5 +63,4 @@ while True:  # Uendeligt loop som opdaterer databasen hvert femte minut (5 * 360
         score = 0
 
     updateDatabase(score, level, temperature, humidity)
-
-    time.sleep(5)
+    time.sleep(5*60)
