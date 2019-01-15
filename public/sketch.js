@@ -99,6 +99,12 @@ function draw() {
   createCanvas(window.innerWidth, window.innerHeight);
   background(250);
 
+  if(flowers.length>5){
+    scaling=height/7;
+  } else {
+    scaling= height / (1 + numFlowers);
+  }
+
   if(site == 'main') {
     textSize(height * 0.09);
     textAlign(LEFT, TOP);
