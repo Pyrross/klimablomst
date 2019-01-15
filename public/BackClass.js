@@ -1,11 +1,11 @@
 function Backbutton(iImg) {
 
-  this.location = createVector(20, 20);
+  this.location = createVector(30, 30);
   this.img = iImg;
 
   this.register = function() {
-    if(mouseX < 40 && mouseX > 1) {
-      if(mouseY < 40 && mouseY > 1) {
+    if(mouseX < window.innerWidth/25 && mouseX > 1) {
+      if(mouseY < window.innerWidth/25 && mouseY > 1) {
         return true;
       }
     } else {
@@ -17,9 +17,9 @@ function Backbutton(iImg) {
    noTint();
    imageMode(CENTER);
    if(this.register()) {
-     image(this.img, this.location.x, this.location.y, 35, 35);
+     image(this.img, this.location.x, this.location.y, window.innerWidth/25, window.innerWidth/25);
    } else {
-    image(this.img, this.location.x, this.location.y, 30, 30);
+    image(this.img, this.location.x, this.location.y, window.innerWidth/28, window.innerWidth/28);
    }
   }
 
