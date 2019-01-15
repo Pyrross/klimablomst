@@ -6,8 +6,6 @@ import firebase_admin
 from firebase_admin import auth, credentials, db, storage
 
 name = "Blomst3a1"
-previousMillis = 0
-interval = 5*60000
 score = 0
 level = 1
 CO2 = 0
@@ -26,25 +24,36 @@ root = db.reference()
 # Tilføjer ny blomst hvis ikke den eksisterer i forvejen.
 klient = root.child(name)
 
+while True:  # Uendeligt loop som opdaterer databasen hvert femte minut (5 * 3600 sekunder)
 
-def calculateScore(temperature, CO2):
-    if (temperature < 25 and temperature > 20 and temperature != 0):
-        score = score + 1
-    if (temperature > 25 and temperature < 20 and temperature != 0):
-        score = score - 1
+    # Måling af temp og humid
+    humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
+    print('Temp={}*C  Humidity={}%'.format(temperature, humidity))
 
-    if (CO2 < 40 and CO2 != 0):
-        score = score + 1
-    if (CO2 > 40):
-        score = score - 1
-
+    score = score + calculateChange(temperature, CO2)
     if (score < 0):
         score = 0
-
-    if (score >= 50 + level*50):
+    if (score >= 50 + level * 50):
         level = level + 1
         score = 0
-    return score
+
+    updateDatabase(score, temperature, humidity)
+
+    time.sleep(5)
+
+def calculateChange(temperature, CO2):
+    change = 0
+    if (temperature < 25 and temperature > 20 and temperature != 0):
+        change = change + 1
+    if (temperature > 25 and temperature < 20 and temperature != 0):
+        change = change - 1
+
+    if (CO2 < 40 and CO2 != 0):
+        change = change + 1
+
+    if (CO2 > 40):
+        change = change - 1
+    return change
 
 
 def updateDatabase(score, temperature, humidity):
@@ -54,16 +63,3 @@ def updateDatabase(score, temperature, humidity):
         'humidity': humidity,
         'score': score
     })
-
-
-while True:  # Uendeligt loop som opdaterer databasen hvert femte minut (5 * 3600 sekunder)
-    millis = int(round(time.time() * 1000))
-
-    # Måling af temp og humid
-    humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
-    print('Temp={}*C  Humidity={}%'.format(temperature, humidity))
-
-    if (millis - previousMillis >= interval):
-        previousMillisUpdate = millis
-        updateScore = calculateScore(temperature, CO2)
-        updateDatabase(updateScore, temperature, humidity)
