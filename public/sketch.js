@@ -119,6 +119,7 @@ function draw() {
       textSize(height * 0.05);
     	flowers[i].update(loc, height * 0.6, 50, 1);
     	flowers[i].display(flowerImg);
+      text('Level ' + flowers[i].level, flowers[i].location.x, flowers[i].location.y + 35 + flowers[i].scaling/ 2);
 
     	backbutton.run();
 
