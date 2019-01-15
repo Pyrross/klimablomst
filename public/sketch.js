@@ -1,6 +1,6 @@
 var database, storage;
 var score = [];
-var lokale = "blomst0";
+var lokaler[] = ["Blomst3a1", "Blomst3a2"];
 
 var numFlowers;
 var scaling;
@@ -10,6 +10,7 @@ var locations = [];
 
 var flowerImg;
 var backImg;
+
 
 var backbutton;
 
@@ -34,33 +35,24 @@ function preload() {
   myFont = loadFont("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/FlameFetish.ttf?alt=media&token=61d214fd-b336-4673-b4a8-d5ca09eabbee");
 }
 
-function readImage(img) {
-  print("læser billede fra " + img);
-  loadImage(img, print("succes"), print("fejl"));
-}
-
-var toType = function(obj) {
-  return ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase()
-}
-
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
 
-  print(firebase.database().ref('blomst0').key);
+  for (let i = 0; i < lokaler.length; i++) {
+    firebase.database().ref(lokaler[i]).orderByKey().limitToLast(1).on('child_added', function(data) {
+    var string = data.val().temperature + ' ' + data.val().humidity + ' ' + data.val().score + ' ' + data.val().level;
+    score[i] = string.split(" ");
+    });
+  }
 
-  firebase.database().ref('blomst0').orderByKey().limitToLast(1).on('child_added', function(data) {
-  var string = data.val().temperature + ' ' + data.val().humidity;
-  score = string.split(" ");
-  print(score);
-  });
 
   flowerImg = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/testBlomst.jpg?alt=media&token=6033f3af-80f1-4a57-88a4-75af12524357");
   backImg = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/tilbage.png?alt=media&token=351e1dd3-ee90-44ae-963c-c0f104034546");
 
-  numFlowers = 2;
+  numFlowers = lokaler.length;
 
   if(numFlowers > 5){
-	  scaling = height/7;
+	  scaling = height / 7;
 
 
     for(let i = 0; i < numFlowers; i++) {
@@ -68,18 +60,26 @@ function setup() {
       locations.push(createVector(((i % 5 + 1)) / 6, (ceil((i + 1) / 5) + 0.5) / 5));
       let loc = createVector(locations[i].x * width, locations[i].y * height);
 
-      flowers.push(new Flower(loc, scaling, 50, 'Flower ' + (1 + i)));
+      flowers.push(new Flower(loc, scaling, 50, lokaler[i]));
+
     }
   } else {
     scaling = height / (1 + numFlowers);
+
     for(let i = 0; i < numFlowers; i++) {
 
       locations.push(createVector((i + 1)/(numFlowers + 1), 1 / 2));
       let loc = createVector(locations[i].x * width, locations[i].y * height);
 
-      flowers.push(new Flower(loc, scaling, 50, 'Flower ' + (1 + i)));
+      flowers.push(new Flower(loc, scaling, 50, lokaler[i]));
+
     }
+
   }
+
+
+
+
   backbutton = new Backbutton(backImg);
 
   site = 'main';
@@ -100,14 +100,14 @@ function draw() {
     textSize(height * 0.09);
     textAlign(LEFT, TOP);
     textFont(myFont);
-    text('Din Blomsterhave', 30, 30);
+    text('Your Garden', 30, 30);
 
     textFont('Arial');
     textSize(height * 0.03);
 
     for(let i = 0; i < numFlowers; i++){
       let loc = createVector(locations[i].x * width, locations[i].y * height);
-      flowers[i].update(loc, scaling, 50, 1 );
+      flowers[i].update(loc, scaling, score[i][2], score[i][3]);
       flowers[i].display(flowerImg);
 
     }
@@ -117,9 +117,8 @@ function draw() {
 	    let loc = createVector(width / 2, height / 2);
 
       textSize(height * 0.05);
-    	flowers[i].update(loc, height * 0.6, 50, 1);
+    	flowers[i].update(loc, height * 0.6, score[i][2], score[i][3]);
     	flowers[i].display(flowerImg);
-      text('Level ' + flowers[i].level, flowers[i].location.x, flowers[i].location.y + 35 + flowers[i].scaling/ 2);
 
     	backbutton.run();
 
@@ -139,6 +138,7 @@ function mouseReleased() {
       	site = flowers[i].name;
       	print(flowers[i].name);
     }
+
   }
 }
 
