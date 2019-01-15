@@ -23,7 +23,7 @@ root = db.reference()
 # Tilføjer ny blomst hvis ikke den eksisterer i forvejen.
 klient = root.child(name)
 
-root.child("brugere").child(name)
+root.child("brugere").child(name).set()
 
 
 def calculateChange(temperature, CO2):
