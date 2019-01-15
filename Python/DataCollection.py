@@ -10,6 +10,8 @@ previousMillis = 0
 interval = 5*60000
 score = 0
 level = 1
+CO2 = 0
+temperature = 0
 
 # Sensor type and pin
 sensor = Adafruit_DHT.DHT11
@@ -17,7 +19,7 @@ pin = 2
 
 # hvor credentials er auth og credentials er til at administrere brugere,
 # db og storage er til at administrere queries og data på databasenself.
-creds = credentials.Certificate('data/creds.json')
+creds = credentials.Certificate('Data/Creds.json')
 bruger = firebase_admin.initialize_app(creds, {'databaseURL': 'https://test-454bb.firebaseio.com'})
 
 root = db.reference()
@@ -33,19 +35,27 @@ while True:  # Uendeligt loop som opdaterer databasen hvert femte minut (5 * 360
 
     if (millis - previousMillis >= interval):
         previousMillisUpdate = millis
-        updateDatabase(calculateScore(temperature, humidity), temperature, humidity)
+        score = calculateScore(temperature, CO2)
+        updateDatabase(score, temperature, humidity)
 
 
-def calculateScore(temperature, humidity):
-    if (temperature < 25 and temperature > 20):
+def calculateScore(temperature, CO2):
+    if (temperature < 25 and temperature > 20 and temperature != 0):
         score = score + 1
-        if (score >= 100):
-            level = 2
-
-    elif(temperature > 25 or temperature < 20):
+    if (temperature > 25 and temperature < 20 and temperature != 0):
         score = score - 1
-        if(level == 2 and score < 100):
-            score = 100
+
+    if (CO2 < 40 and CO2 != 0):
+        score = score + 1
+    if (CO2 > 40):
+        score = score - 1
+
+    if (score < 0):
+        score = 0
+
+    if (score >= 50 + level*50):
+        level = level + 1
+        score = 0
     return score
 
 
