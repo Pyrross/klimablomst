@@ -39,13 +39,16 @@ def calculateChange(temperature, CO2):
         change = change - 1
     return change
 
-def updateDatabase(score, temperature, humidity):
+
+def updateDatabase(score, level, temperature, humidity):
     # Update database
     klient.child(strftime("%Y%m%d%H%M%S", gmtime())).set({
         'temperature': temperature,
         'humidity': humidity,
-        'score': score
+        'score': score,
+        'level': level
     })
+
 
 while True:  # Uendeligt loop som opdaterer databasen hvert femte minut (5 * 3600 sekunder)
 
