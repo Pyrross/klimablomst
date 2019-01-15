@@ -63,6 +63,6 @@ while True:  # Uendeligt loop som opdaterer databasen hvert femte minut (5 * 360
         level = level + 1
         score = 0
 
-    updateDatabase(score, temperature, humidity)
+    updateDatabase(score, level, temperature, humidity)
 
     time.sleep(5)
