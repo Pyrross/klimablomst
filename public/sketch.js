@@ -97,7 +97,7 @@ function setup() {
 function draw() {
   // opdatering af vinduet
   createCanvas(window.innerWidth, window.innerHeight);
-  background(250);
+  background(250, 0, 0);
 
   if(site == 'main') {
     textSize(height * 0.09);
