@@ -110,7 +110,7 @@ function draw() {
 
     for(let i = 0; i < numFlowers; i++){
       let loc = createVector(locations[i].x * width, locations[i].y * height);
-      flowers[i].update(loc, scaling, 50,1 );
+      flowers[i].update(loc, scaling, 50, 1 );
       flowers[i].display(flowerImg);
 
     }
@@ -120,7 +120,7 @@ function draw() {
 	    let loc = createVector(width / 2, height / 2);
 
       textSize(height * 0.05);
-    	flowers[i].update(loc, height * 0.6, 50,1);
+    	flowers[i].update(loc, height * 0.6, 50, 1);
     	flowers[i].display(flowerImg);
 
     	backbutton.run();
