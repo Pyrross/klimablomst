@@ -5,11 +5,10 @@ from time import gmtime, strftime
 import firebase_admin
 from firebase_admin import auth, credentials, db, storage
 
-intervalScore = 5*60000;
-previousMillisScore = 0;
-intervalUpdate = 5*60000;
-previousMillisUpdate = 0;
+previousMillis = 0;
+interval = 5*60000;
 score = 0;
+level = 1;
 
 # Sensor type and pin
 sensor = Adafruit_DHT.DHT11
@@ -31,18 +30,25 @@ while True: # Uendeligt loop som opdaterer databasen hvert femte minut (5 * 3600
     humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
     print('Temp={}*C  Humidity={}%'.format(temperature, humidity))
 
-    calculateScore();
+    if (millis - previousMillis >= interval):
+        previousMillisUpdate = millis
+        updateDatabase(calculateScore(temperature, humidity), temperature, humidity)
 
+def calculateScore (temperature, humidity):
+    if (temperature<25 and temperature > 20):
+        score = score +1
+        if (score >= 100):
+            level = 2
+
+    elif(temperature > 25 or temperature < 20):
+        score = score -1
+        if(level == 2 and score < 100):
+            score = 100
+
+def updateDatabase(score, temperature, humidity):
     #Update database
-    if (millis - previousMillisUpdate >= intervalUpdate):
-        previousMillisUpdate = millis;
-        klient.child(strftime("%Y%m%d%H%M%S", gmtime())).set({
-            'temperature' : temperature,
-            'humidity' : humidity
-    })
-
-def calculateScore (temp, humid):
-    if (millis - previousMillisScore >= intervalScore):
-        previousMillisScore = millis;
-        #Hvis betingelser er opfyldt
-        score++;
+    klient.child(strftime("%Y%m%d%H%M%S", gmtime())).set({
+        'temperature' : temperature,
+        'humidity' : humidity,
+        'score' : score
+            })
