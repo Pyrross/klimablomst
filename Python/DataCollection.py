@@ -35,7 +35,8 @@ while True:  # Uendeligt loop som opdaterer databasen hvert femte minut (5 * 360
 
     if (millis - previousMillis >= interval):
         previousMillisUpdate = millis
-        updateDatabase(calculateScore(temperature, CO2), temperature, humidity)
+        score = calculateScore(temperature, CO2)
+        updateDatabase(score, temperature, humidity)
 
 
 def calculateScore(temperature, CO2):
