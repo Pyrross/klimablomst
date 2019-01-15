@@ -5,6 +5,7 @@ from time import gmtime, strftime
 import firebase_admin
 from firebase_admin import auth, credentials, db, storage
 
+name = "Blomst3a1"
 previousMillis = 0
 interval = 5*60000
 score = 0
@@ -21,7 +22,7 @@ bruger = firebase_admin.initialize_app(creds, {'databaseURL': 'https://test-454b
 
 root = db.reference()
 # Tilføjer ny blomst hvis ikke den eksisterer i forvejen.
-klient = root.child("blomst0")
+klient = root.child(name)
 
 while True:  # Uendeligt loop som opdaterer databasen hvert femte minut (5 * 3600 sekunder)
     millis = int(round(time.time() * 1000))
