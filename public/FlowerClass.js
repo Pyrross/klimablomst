@@ -10,6 +10,7 @@ function Flower(iLocation, iScaling, iScore,iName) {
   this.location = iLocation;
   this.scaling = iScaling;
   this.score = iScore;
+  this.level = 1;
   this.name = iName;
 
 
@@ -28,10 +29,11 @@ function Flower(iLocation, iScaling, iScore,iName) {
     }
   }
 
-  this.update = function(iLocation, iScaling, iScore) {
+  this.update = function(iLocation, iScaling, iScore, iLevel) {
   	this.location = iLocation;
   	this.scaling = iScaling;
   	this.score = iScore;
+    this.level = iLevel;
 
   }
 
@@ -46,6 +48,7 @@ function Flower(iLocation, iScaling, iScore,iName) {
     }
     textAlign(CENTER,[TOP]);
     text(this.name, this.location.x, this.location.y + 5 + this.scaling / 2);
+    text('Level ' + this.level, this.location.x, this.location.y + 30 + this.scaling/ 2);
   }
 
 }
