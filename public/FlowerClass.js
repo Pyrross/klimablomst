@@ -48,7 +48,7 @@ function Flower(iLocation, iScaling, iScore,iName) {
     }
     textAlign(CENTER,[TOP]);
     text(this.name, this.location.x, this.location.y + 5 + this.scaling / 2);
-    text('Level ' + this.level, this.location.x, this.location.y + 30 + this.scaling/ 2);
+    text('Level ' + this.level, this.location.x, this.location.y + 35 + this.scaling/ 2);
   }
 
 }
