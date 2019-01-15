@@ -39,7 +39,7 @@ function Flower(iLocation, iScaling, iScore,iName) {
 
 
   this.display = function(iImg) {
-    tint(0,map(this.score, 0, 100, 0, 255), 0, 255);
+    tint(50,map(this.score, 0, 100, 0, 255), 50, 255);
     imageMode(CENTER);
     if(this.register()){
 	    image(iImg, this.location.x, this.location.y, this.scaling + 5, this.scaling + 5);
