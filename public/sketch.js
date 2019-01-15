@@ -1,6 +1,6 @@
 var database, storage;
 var score = [];
-var lokaler[] = ["Blomst3a1", "Blomst3a2"];
+var lokaler = ["Blomst3a1", "Blomst3a2"];
 
 var numFlowers;
 var scaling;
@@ -37,14 +37,23 @@ function preload() {
 
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
-
+  print(lokaler);
   for (let i = 0; i < lokaler.length; i++) {
     firebase.database().ref(lokaler[i]).orderByKey().limitToLast(1).on('child_added', function(data) {
     var string = data.val().temperature + ' ' + data.val().humidity + ' ' + data.val().score + ' ' + data.val().level;
     score[i] = string.split(" ");
+    //print(score[0][2]);
     });
   }
-
+  if (typeof score[0] == 'undefined') {
+    for (let i = 0; i < lokaler.length; i++) {
+      score[i] = [];
+      for (let j = 0; j < lokaler.length; j++) {
+        score[i][j] = 1;
+      }
+      print(score[i][0]);
+    }
+  }
 
   flowerImg = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/testBlomst.jpg?alt=media&token=6033f3af-80f1-4a57-88a4-75af12524357");
   backImg = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/tilbage.png?alt=media&token=351e1dd3-ee90-44ae-963c-c0f104034546");
@@ -53,7 +62,6 @@ function setup() {
 
   if(numFlowers > 5){
 	  scaling = height / 7;
-
 
     for(let i = 0; i < numFlowers; i++) {
 
@@ -86,6 +94,7 @@ function setup() {
 }
 
 function draw() {
+  print(score);
   // opdatering af vinduet
   createCanvas(window.innerWidth, window.innerHeight);
   background(250);
@@ -105,7 +114,7 @@ function draw() {
     textFont('Arial');
     textSize(height * 0.03);
 
-    for(let i = 0; i < numFlowers; i++){
+    for (let i = 0; i < numFlowers; i++){
       let loc = createVector(locations[i].x * width, locations[i].y * height);
       flowers[i].update(loc, scaling, score[i][2], score[i][3]);
       flowers[i].display(flowerImg);
@@ -121,7 +130,6 @@ function draw() {
     	flowers[i].display(flowerImg);
 
     	backbutton.run();
-
     }
   }
 }
