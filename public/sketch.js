@@ -1,22 +1,9 @@
 var database, storage;
-var score = [];
+var score, flowers, locations = [];
 var lokaler = ["Blomst3a1", "Blomst3a2"];
-
 var numFlowers;
-var scaling;
-
-var flowers = [];
-var locations = [];
-
-var flowerImg;
-var backImg;
-
-
-var backbutton;
-
-var site;
-
-var myFont;
+var flowerImg, backImg, scaling;
+var backbutton, site, myFont;
 
 function preload() {
   let klar = false;
@@ -60,34 +47,23 @@ function setup() {
 
   if(numFlowers > 5){
 	  scaling = height / 7;
-
     for(let i = 0; i < numFlowers; i++) {
-
       locations.push(createVector(((i % 5 + 1)) / 6, (ceil((i + 1) / 5) + 0.5) / 5));
       let loc = createVector(locations[i].x * width, locations[i].y * height);
 
       flowers.push(new Flower(loc, scaling, 50, lokaler[i]));
-
     }
   } else {
     scaling = height / (1 + numFlowers);
 
     for(let i = 0; i < numFlowers; i++) {
-
       locations.push(createVector((i + 1)/(numFlowers + 1), 1 / 2));
       let loc = createVector(locations[i].x * width, locations[i].y * height);
 
       flowers.push(new Flower(loc, scaling, 50, lokaler[i]));
-
     }
-
   }
-
-
-
-
   backbutton = new Backbutton(backImg);
-
   site = 'main';
 }
 
@@ -96,11 +72,9 @@ function draw() {
   createCanvas(window.innerWidth, window.innerHeight);
   background(250);
 
-  if(flowers.length>5){
+  if(flowers.length>5) {
     scaling=height/7;
-  } else {
-    scaling= height / (1 + numFlowers);
-  }
+  } else scaling= height / (1 + numFlowers);
 
   if(site == 'main') {
     textSize(height * 0.09);
@@ -115,7 +89,6 @@ function draw() {
       let loc = createVector(locations[i].x * width, locations[i].y * height);
       flowers[i].update(loc, scaling, score[i][2], score[i][3]);
       flowers[i].display(flowerImg);
-
     }
   }
   for (let i = 0; i < flowers.length; i++) {
@@ -142,7 +115,6 @@ function mouseReleased() {
       	site = flowers[i].name;
       	print(flowers[i].name);
     }
-
   }
 }
 

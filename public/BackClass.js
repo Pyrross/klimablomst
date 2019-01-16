@@ -1,14 +1,13 @@
 function Backbutton(iImg) {
-
   this.location = createVector(30, 30);
   this.img = iImg;
 
+  // tjekker om musen er henover. Vektorafstand bruges da det ern en cirkulær figur.
   this.register = function() {
-    if(mouseX < window.innerWidth/25 && mouseX > 1) {
-      if(mouseY < window.innerWidth/25 && mouseY > 1) {
+    this.mouseLoc = createVector(mouseX, mouseY);
+    if(Distance(this.location, this.mouseLoc) < window.innerWidth / 56) {
         return true;
-      }
-    } else {
+      } else {
       return false;
     }
   }
@@ -18,15 +17,14 @@ function Backbutton(iImg) {
    imageMode(CENTER);
    if(this.register()) {
      image(this.img, this.location.x, this.location.y, window.innerWidth/25, window.innerWidth/25);
-   } else {
-    image(this.img, this.location.x, this.location.y, window.innerWidth/28, window.innerWidth/28);
-   }
+   } else image(this.img, this.location.x, this.location.y, window.innerWidth/28, window.innerWidth/28);
   }
-
 
   this.run = function() {
     this.display();
   }
+}
 
-
+function Distance(a, b) {
+  return Math.sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
 }
