@@ -37,21 +37,19 @@ function preload() {
 
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
-  print(lokaler);
   for (let i = 0; i < lokaler.length; i++) {
     firebase.database().ref(lokaler[i]).orderByKey().limitToLast(1).on('child_added', function(data) {
     var string = data.val().temperature + ' ' + data.val().humidity + ' ' + data.val().score + ' ' + data.val().level;
     score[i] = string.split(" ");
-    //print(score[0][2]);
     });
   }
+  // Da den første hentning af firebase-data er udefineret benyttes et if-statement til at undvige fejl
   if (typeof score[0] == 'undefined') {
     for (let i = 0; i < lokaler.length; i++) {
       score[i] = [];
       for (let j = 0; j < lokaler.length; j++) {
         score[i][j] = 1;
       }
-      print(score[i][0]);
     }
   }
 
@@ -94,7 +92,6 @@ function setup() {
 }
 
 function draw() {
-  print(score);
   // opdatering af vinduet
   createCanvas(window.innerWidth, window.innerHeight);
   background(250);
@@ -138,7 +135,6 @@ function mouseReleased() {
 
   if(backbutton.register()){
  	    site = 'main';
-  	  print('bop');
    }
 
   for(let i = 0; i < flowers.length; i++) {
