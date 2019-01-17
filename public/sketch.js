@@ -1,5 +1,7 @@
 var database, storage;
-var score, flowers, locations = [];
+var score = [];
+var flowers = [];
+var locations = [];
 var lokaler = ["Blomst3a1", "Blomst3a2"];
 var numFlowers;
 var flowerImg, backImg, scaling;
