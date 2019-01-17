@@ -84,7 +84,7 @@ function draw() {
   }
   for (let i = 0; i < flowers.length; i++) {
     if(site == flowers[i].name) {
-	    let loc = createVector(width / 2, height / 2);
+	    let loc = createVector(width /2 , height / 3);
 
       textSize(height * 0.05);
     	flowers[i].update(loc, height * 0.6, flowerData[i][2], flowerData[i][3]);
