@@ -14,20 +14,21 @@ function preload() {
 
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
-  for (let i = 0; i < lokaler.length; i++) {
-    firebase.database().ref(lokaler[i]).orderByKey().limitToLast(1).on('child_added', function(data) {
+  for (let i = 0; i < rooms.length; i++) {
+    firebase.database().ref(rooms[i]).orderByKey().limitToLast(1).on('child_added', function(data) {
     var string = data.val().temperature + ' ' + data.val().humidity + ' ' + data.val().score + ' ' + data.val().level + ' ' + data.key;
     flowerData[i] = string.split(" ");
     });
   }
   // Da den første hentning af firebase-data er udefineret benyttes et if-statement til at undvige fejl
   if (typeof flowerData[0] == 'undefined') {
-    for (let i = 0; i < lokaler.length; i++) {
+    for (let i = 0; i < rooms.length; i++) {
       flowerData[i] = [];
       for (let j = 0; j < 5; j++) {
         flowerData[i][j] = 1;
       }
     }
+  }
 
     //Hent filer fra online arkiv
     flowerImg = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/testBlomst.jpg?alt=media&token=6033f3af-80f1-4a57-88a4-75af12524357");
