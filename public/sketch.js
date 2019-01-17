@@ -7,6 +7,11 @@ var numFlowers;
 var flowerImg, backImg, scaling;
 var backbutton, site, FlameFetishFont;
 
+//Funktion der hent tekstfont
+function preload() {
+    FlameFetishFont = loadFont("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/FlameFetish.ttf?alt=media&token=61d214fd-b336-4673-b4a8-d5ca09eabbee");
+}
+
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
   for (let i = 0; i < lokaler.length; i++) {
@@ -85,7 +90,8 @@ function draw() {
 
             textSize(height * 0.05);
             flowers[i].update(loc, height * 0.6, flowerData[i][2], flowerData[i][3]);
-            flowers[i].display(flowerImg);
+            flowers[i].displayOnly(flowerImg, flowerData[i][0]);
+
 
             //Viser tilbage knap objektet.
             backbutton.display();
@@ -104,11 +110,6 @@ function mouseReleased() {
             print(flowers[i].name);
         }
     }
-}
-
-//Funktion der hent tekstfont
-function preload() {
-    FlameFetishFont = loadFont("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/FlameFetish.ttf?alt=media&token=61d214fd-b336-4673-b4a8-d5ca09eabbee");
 }
 
 function IsFresh(key) {

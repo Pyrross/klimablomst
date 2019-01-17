@@ -23,10 +23,19 @@ function Flower(iLocation, iScaling, iScore, iName) {
         this.level = iLevel;
     }
 
-    //Funktion der viser blomsterne
-    this.display = function(iImg) {
-        tint(50, map(this.score, 0, 100, 0, 255), 50, 255);
-        imageMode(CENTER);
+  this.displayOnly = function(iImg, iTemp) {
+    this.display(iImg);
+    text("Level "+ this.level, this.location.x, this.location.y + 30 + this.scaling/2)
+    strokeWeight(4);
+    stroke(51)
+    rectMode(CORNERS);
+    rect(width/4, height/4, scaling/20+width/4, height*3/4);
+    strokeWeight(2);
+  }
+
+  this.display = function(iImg) {
+    tint(50, map(this.score, 0, 100, 50, 255), 50, 255);
+    imageMode(CENTER);
 
         //Er musen over blomsterne? Hvis ja, highlight blomsten.
         if (this.register()) {
