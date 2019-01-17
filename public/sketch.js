@@ -2,47 +2,42 @@ var database, storage;
 var flowerData = [];
 var flowers = [];
 var locations = [];
-var lokaler = ["Blomst3a1", "Blomst3a2"];
+var rooms = ["3a1", "3a2"];
 var numFlowers;
 var flowerImg, backImg, scaling;
-var backbutton, site, myFont;
-
-function preload() {
-  let klar = false;
-
-  myFont = loadFont("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/FlameFetish.ttf?alt=media&token=61d214fd-b336-4673-b4a8-d5ca09eabbee");
-}
+var backbutton, site, FlameFetishFont;
 
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
-  for (let i = 0; i < lokaler.length; i++) {
-    firebase.database().ref(lokaler[i]).orderByKey().limitToLast(1).on('child_added', function(data) {
+  for (let i = 0; i < rooms.length; i++) {
+    firebase.database().ref(rooms[i]).orderByKey().limitToLast(1).on('child_added', function(data) {
     var string = data.val().temperature + ' ' + data.val().humidity + ' ' + data.val().score + ' ' + data.val().level;
     flowerData[i] = string.split(" ");
     });
   }
-  // Da den første hentning af firebase-data er udefineret benyttes et if-statement til at undvige fejl
+  // Da den første hentning af firebase-data er udefineret benyttes et if-statement til at undvige fejl.
   if (typeof flowerData[0] == 'undefined') {
-    for (let i = 0; i < lokaler.length; i++) {
+    for (let i = 0; i < rooms.length; i++) {
       flowerData[i] = [];
-      for (let j = 0; j < lokaler.length; j++) {
+      for (let j = 0; j < rooms.length; j++) {
         flowerData[i][j] = 1;
       }
     }
   }
 
+//Hent filer fra online arkiv
   flowerImg = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/testBlomst.jpg?alt=media&token=6033f3af-80f1-4a57-88a4-75af12524357");
   backImg = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/tilbage.png?alt=media&token=351e1dd3-ee90-44ae-963c-c0f104034546");
 
-  numFlowers = lokaler.length;
-
+//Opret en blomst per klasse
+  numFlowers = rooms.length;
   if(numFlowers > 5){
 	  scaling = height / 7;
     for(let i = 0; i < numFlowers; i++) {
       locations.push(createVector(((i % 5 + 1)) / 6, (ceil((i + 1) / 5) + 0.5) / 5));
       let loc = createVector(locations[i].x * width, locations[i].y * height);
 
-      flowers.push(new Flower(loc, scaling, 50, lokaler[i]));
+      flowers.push(new Flower(loc, scaling, 50, rooms[i]));
     }
   } else {
     scaling = height / (1 + numFlowers);
@@ -51,31 +46,35 @@ function setup() {
       locations.push(createVector((i + 1)/(numFlowers + 1), 1 / 2));
       let loc = createVector(locations[i].x * width, locations[i].y * height);
 
-      flowers.push(new Flower(loc, scaling, 50, lokaler[i]));
+      flowers.push(new Flower(loc, scaling, 50, rooms[i]));
     }
   }
+
+//Opret tilbage knap objekt
   backbutton = new Backbutton(backImg);
   site = 'main';
 }
 
 function draw() {
-  // opdatering af vinduet
+  //Opdatering af vinduet således at det passer til skærmstørrelsen
   createCanvas(window.innerWidth, window.innerHeight);
   background(250);
 
+//Design ændrer sig således at det passer til antallet af blomster.
   if(flowers.length>5) {
     scaling=height/7;
   } else scaling= height / (1 + numFlowers);
 
+//Titel på side - anvender speciel font
   if(site == 'main') {
     textSize(height * 0.09);
     textAlign(LEFT, TOP);
-    textFont(myFont);
+    textFont(FlameFetishFont);
     text('Blomsterhaven', 30, 30);
-
     textFont('Arial');
     textSize(height * 0.03);
 
+//Visualiser blomster
     for (let i = 0; i < numFlowers; i++){
       let loc = createVector(locations[i].x * width, locations[i].y * height);
       flowers[i].update(loc, scaling, flowerData[i][2], flowerData[i][3]);
@@ -90,11 +89,13 @@ function draw() {
     	flowers[i].update(loc, height * 0.6, flowerData[i][2], flowerData[i][3]);
     	flowers[i].display(flowerImg);
 
-    	backbutton.run();
+//Vis tilbage knap
+    	backbutton.display();
     }
   }
 }
 
+//Funktion - bliver musen sluppet?
 function mouseReleased(){
   if(backbutton.register()){
  	    site = 'main';
@@ -106,4 +107,9 @@ function mouseReleased(){
       	print(flowers[i].name);
     }
   }
+}
+
+//Funktion der hent tekstfont
+function preload() {
+  FlameFetishFont = loadFont("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/FlameFetish.ttf?alt=media&token=61d214fd-b336-4673-b4a8-d5ca09eabbee");
 }

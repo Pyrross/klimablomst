@@ -10,10 +10,11 @@ score = 0
 level = 1
 CO2 = 0
 
-# Sensor type and pin
+# Sensor type og pin den er forbundet til
 sensor = Adafruit_DHT.DHT11
 pin = 2
 
+# Credentials til firebase,
 # hvor credentials er auth og credentials er til at administrere brugere,
 # db og storage er til at administrere queries og data på databasenself.
 creds = credentials.Certificate('Data/Creds.json')
@@ -24,7 +25,7 @@ root = db.reference()
 klient = root.child(name)
 
 
-def calculateChange(temperature, CO2):
+def calculateChange(temperature, CO2):  # Funktion - skal scoren ændres?
     change = 0
     if (temperature < 25 and temperature > 20 and temperature != 0):
         change = change + 1
@@ -38,7 +39,7 @@ def calculateChange(temperature, CO2):
     return change
 
 
-def updateDatabase(score, level, temperature, humidity):
+def updateDatabase(score, level, temperature, humidity):  # Funtion opdaterer database.
     # Update database
     klient.child(strftime("%Y%m%d%H%M%S", gmtime())).set({
         'temperature': temperature,
