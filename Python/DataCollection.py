@@ -39,13 +39,14 @@ def calculateChange(temperature, CO2):  # Funktion - skal scoren ændres?
     return change
 
 
-def updateDatabase(score, level, temperature, humidity):  # Funtion opdaterer database.
+def updateDatabase(score, level, temperature, humidity, change):  # Funtion opdaterer database.
     # Update database
     klient.child(strftime("%Y%m%d%H%M%S", gmtime())).set({
         'temperature': temperature,
         'humidity': humidity,
         'score': score,
-        'level': level
+        'level': level,
+        'change': change
     })
 
 
@@ -55,12 +56,13 @@ while True:  # Uendeligt loop som opdaterer databasen hvert femte minut (5 * 360
     humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
     print('Temp={}*C  Humidity={}%'.format(temperature, humidity))
 
-    score = score + calculateChange(temperature, CO2)
+    change = calculateChange(temperature, CO2)
+    score = score + change
     if (score < 0):
         score = 0
     if (score >= 50 + level * 50):
         level = level + 1
         score = 0
 
-    updateDatabase(score, level, temperature, humidity)
+    updateDatabase(score, level, temperature, humidity, change)
     time.sleep(5*60)
