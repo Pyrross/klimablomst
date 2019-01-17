@@ -5,7 +5,7 @@ from time import gmtime, strftime
 import firebase_admin
 from firebase_admin import auth, credentials, db, storage
 
-name = "Blomst3a1"
+name = "3a1"
 score = 0
 level = 1
 CO2 = 0
