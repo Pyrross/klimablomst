@@ -31,7 +31,7 @@ function Flower(iLocation, iScaling, iScore, iName) {
     stroke(51)
     rectMode(CORNERS);
     rect(width/4, height/4, scaling/20+width/4, height*3/4);
-    strokeWeight(2);
+    strokeWeight(1);
   }
 
   this.display = function(iImg) {
