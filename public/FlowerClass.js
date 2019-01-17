@@ -25,12 +25,17 @@ function Flower(iLocation, iScaling, iScore, iName) {
 
   this.displayOnly = function(iImg, iTemp) {
     this.display(iImg);
-    text("Level "+ this.level, this.location.x, this.location.y + 30 + this.scaling/2)
-    strokeWeight(4);
-    stroke(51)
+    text("Level "+ this.level, this.location.x, this.location.y + 0.06*height + this.scaling/2)
+    smooth();
+    strokeWeight(3);
+    stroke(0);
     rectMode(CORNERS);
-    rect(width/4, height/4, scaling/20+width/4, height*3/4);
-    strokeWeight(2);
+    rect(this.location.x - this.scaling/2, 0.12*height+ this.location.y +this.scaling/2 ,this.location.x + this.scaling/2, 0.14*height+ this.location.y+this.scaling/2 );
+    stroke(0, 230, 0);
+    strokeWeight(scaling/40);
+    line(4+this.location.x - this.scaling/2, 0.13*height + this.location.y + this.scaling/2, map(this.score, 0, 50 + this.level*50, 4+this.location.x- this.scaling/2, this.location.x - 4 + this.scaling/2), 0.13*height+ this.location.y + this.scaling/2);
+    noStroke();
+
   }
 
   this.display = function(iImg) {
@@ -42,7 +47,7 @@ function Flower(iLocation, iScaling, iScore, iName) {
             image(iImg, this.location.x, this.location.y, this.scaling + 5, this.scaling + 5);
         } else image(iImg, this.location.x, this.location.y, this.scaling, this.scaling);
 
-        textAlign(CENTER, [TOP]);
-        text(this.name, this.location.x, this.location.y + 5 + this.scaling / 2);
+    textAlign(CENTER,[TOP]);
+    text(this.name, this.location.x, this.location.y + 10 + this.scaling / 2);
     }
 }
