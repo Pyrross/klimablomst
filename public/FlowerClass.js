@@ -26,11 +26,12 @@ function Flower(iLocation, iScaling, iScore, iName) {
 
   this.displayOnly = function(iImg, iTemp) {
     this.display(iImg);
-    //text("Level "+ flowers[i].level, flowers[i].location.x, flowers[i].location.y + 30 + flowers[i].scaling/2)
+    text("Level "+ this.level, this.location.x, this.location.y + 30 + this.scaling/2)
     strokeWeight(4);
     stroke(51)
     rectMode(CORNERS);
-    //rect(width/4, height/4, scaling/20+width/4, height*3/4);
+    rect(width/4, height/4, scaling/20+width/4, height*3/4);
+    strokeWeight(2);
   }
 
   this.display = function(iImg) {
