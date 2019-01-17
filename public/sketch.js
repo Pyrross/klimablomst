@@ -8,22 +8,20 @@ var flowerImg, backImg, scaling;
 var backbutton, site, FlameFetishFont;
 
 function setup() {
-    createCanvas(window.innerWidth, window.innerHeight);
-    for (let i = 0; i < rooms.length; i++) {
-        firebase.database().ref(rooms[i]).orderByKey().limitToLast(1).on('child_added', function(data) {
-            var string = data.val().temperature + ' ' + data.val().humidity + ' ' + data.val().score + ' ' + data.val().level;
-            flowerData[i] = string.split(" ");
-        });
-    }
-
-    // Da den første hentning af firebase-data er udefineret benyttes et if-statement til at undvige fejl.
-    if (typeof flowerData[0] == 'undefined') {
-        for (let i = 0; i < rooms.length; i++) {
-            flowerData[i] = [];
-            for (let j = 0; j < rooms.length; j++) {
-                flowerData[i][j] = 1;
-            }
-        }
+  createCanvas(window.innerWidth, window.innerHeight);
+  for (let i = 0; i < lokaler.length; i++) {
+    firebase.database().ref(lokaler[i]).orderByKey().limitToLast(1).on('child_added', function(data) {
+    var string = data.val().temperature + ' ' + data.val().humidity + ' ' + data.val().score + ' ' + data.val().level + ' ' + data.key;
+    flowerData[i] = string.split(" ");
+    });
+  }
+  // Da den første hentning af firebase-data er udefineret benyttes et if-statement til at undvige fejl
+  if (typeof flowerData[0] == 'undefined') {
+    for (let i = 0; i < lokaler.length; i++) {
+      flowerData[i] = [];
+      for (let j = 0; j < 5; j++) {
+        flowerData[i][j] = 1;
+      }
     }
 
     //Hent filer fra online arkiv
@@ -111,4 +109,24 @@ function mouseReleased() {
 //Funktion der hent tekstfont
 function preload() {
     FlameFetishFont = loadFont("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/FlameFetish.ttf?alt=media&token=61d214fd-b336-4673-b4a8-d5ca09eabbee");
+}
+
+function IsFresh(key) {
+  var now = new Date();
+  if (typeof key == 'string') {
+    if ((parseInt(key.slice(0,4)) == now.getFullYear()) && (parseInt(key.slice(4,6)) == now.getMonth() + 1) && (parseInt(key.slice(6,8)) == now.getDate()) && (parseInt(key.slice(8,10)) == now.getHours() + 1)) {
+      if (now.getMinutes() - parseInt(key.slice(10,11)) < 30) {
+        return true;
+      }
+      else return false;
+    }
+    else return false;
+  }
+}
+
+function TimeOfMeasurement(key) {
+  if (typeof key == 'string') {
+    var time = key.slice(6,8) + "/" + key.slice(4,6) + "-" + key.slice(0,4) + ", " + key.slice(8,10) + ":" + key.slice(10,12) + ":" + key.slice(12,14);
+    return time;
+  }
 }
