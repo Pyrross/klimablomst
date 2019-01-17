@@ -16,7 +16,7 @@ function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
   for (let i = 0; i < rooms.length; i++) {
     firebase.database().ref(rooms[i]).orderByKey().limitToLast(1).on('child_added', function(data) {
-    var string = data.val().temperature + ' ' + data.val().humidity + ' ' + data.val().score + ' ' + data.val().level + ' ' + data.key;
+    var string = data.val().temperature + ' ' + data.val().humidity + ' ' + data.val().score + ' ' + data.val().level + ' ' + data.key + ' ' + data.val().change;
     flowerData[i] = string.split(" ");
     });
   }
@@ -24,7 +24,7 @@ function setup() {
   if (typeof flowerData[0] == 'undefined') {
     for (let i = 0; i < rooms.length; i++) {
       flowerData[i] = [];
-      for (let j = 0; j < 5; j++) {
+      for (let j = 0; j < 6; j++) {
         flowerData[i][j] = 1;
       }
     }
@@ -41,7 +41,7 @@ function setup() {
         for (let i = 0; i < numFlowers; i++) {
             locations.push(createVector(((i % 5 + 1)) / 6, (ceil((i + 1) / 5) + 0.5) / 5));
             let loc = createVector(locations[i].x * width, locations[i].y * height);
-            flowers.push(new Flower(loc, scaling, 50, rooms[i]));
+            flowers.push(new Flower(loc, scaling, rooms[i], flowerData[i]));
         }
     } else {
         scaling = height / (1 + numFlowers);
@@ -49,7 +49,7 @@ function setup() {
         for (let i = 0; i < numFlowers; i++) {
             locations.push(createVector((i + 1) / (numFlowers + 1), 1 / 2));
             let loc = createVector(locations[i].x * width, locations[i].y * height);
-            flowers.push(new Flower(loc, scaling, 50, rooms[i]));
+            flowers.push(new Flower(loc, scaling, rooms[i], flowerData[i]));
         }
     }
 
@@ -80,7 +80,7 @@ function draw() {
         //Visualiser blomster
         for (let i = 0; i < numFlowers; i++) {
             let loc = createVector(locations[i].x * width, locations[i].y * height);
-            flowers[i].update(loc, scaling, flowerData[i][2], flowerData[i][3]);
+            flowers[i].update(loc, scaling, flowerData[i]);
             flowers[i].display(flowerImg);
         }
     }
@@ -88,10 +88,10 @@ function draw() {
     for (let i = 0; i < flowers.length; i++) {
         if (site == flowers[i].name) {
             let loc = createVector(width / 2, height / 3);
-
+            textAlign(LEFT, TOP);
             textSize(height * 0.05);
-            flowers[i].update(loc, height * 0.6, flowerData[i][2], flowerData[i][3]);
-            flowers[i].displayOnly(flowerImg, flowerData[i][0]);
+            flowers[i].update(loc, height * 0.6, flowerData[i]);
+            flowers[i].displayOnly(flowerImg);
 
 
             //Viser tilbage knap objektet.
@@ -116,7 +116,8 @@ function mouseReleased() {
 function IsFresh(key) {
   var now = new Date();
   if (typeof key == 'string') {
-    if ((parseInt(key.slice(0,4)) == now.getFullYear()) && (parseInt(key.slice(4,6)) == now.getMonth() + 1) && (parseInt(key.slice(6,8)) == now.getDate()) && (parseInt(key.slice(8,10)) == now.getHours() + 1)) {
+    if ((parseInt(key.slice(0,4)) == now.getFullYear()) && (parseInt(key.slice(4,6)) == now.getMonth() + 1) && (parseInt(key.slice(6,8)) == now.getDate()) && (parseInt(key.slice(8,10)) + 1 == now.getHours())) {
+      print("tampen brænder");
       if (now.getMinutes() - parseInt(key.slice(10,11)) < 30) {
         return true;
       }
