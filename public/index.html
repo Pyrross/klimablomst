@@ -5,10 +5,25 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.dom.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.sound.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.0/firebase-storage.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
     <meta charset="utf-8" />
 
+    <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyCI_InWdB8rCzHey_-QpvmGEigN5NH36NQ",
+      authDomain: "test-454bb.firebaseapp.com",
+      databaseURL: "https://test-454bb.firebaseio.com",
+      projectId: "test-454bb",
+      storageBucket: "test-454bb.appspot.com",
+      messagingSenderId: "947750622088"
+    };
+    firebase.initializeApp(config);
+    storage = firebase.storage().ref();
+    </script>
   </head>
   <body>
     <script src="sketch.js"></script>

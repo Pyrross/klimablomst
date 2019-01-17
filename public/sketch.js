@@ -1,5 +1,5 @@
 var database, storage;
-var score = [];
+var flowerData = [];
 var flowers = [];
 var locations = [];
 var lokaler = ["Blomst3a1", "Blomst3a2"];
@@ -9,17 +9,6 @@ var backbutton, site, myFont;
 
 function preload() {
   let klar = false;
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyCI_InWdB8rCzHey_-QpvmGEigN5NH36NQ",
-    authDomain: "test-454bb.firebaseapp.com",
-    databaseURL: "https://test-454bb.firebaseio.com",
-    projectId: "test-454bb",
-    storageBucket: "test-454bb.appspot.com",
-    messagingSenderId: "947750622088"
-  };
-  firebase.initializeApp(config);
-  storage = firebase.storage().ref();
 
   myFont = loadFont("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/FlameFetish.ttf?alt=media&token=61d214fd-b336-4673-b4a8-d5ca09eabbee");
 }
@@ -29,15 +18,15 @@ function setup() {
   for (let i = 0; i < lokaler.length; i++) {
     firebase.database().ref(lokaler[i]).orderByKey().limitToLast(1).on('child_added', function(data) {
     var string = data.val().temperature + ' ' + data.val().humidity + ' ' + data.val().score + ' ' + data.val().level;
-    score[i] = string.split(" ");
+    flowerData[i] = string.split(" ");
     });
   }
   // Da den første hentning af firebase-data er udefineret benyttes et if-statement til at undvige fejl
-  if (typeof score[0] == 'undefined') {
+  if (typeof flowerData[0] == 'undefined') {
     for (let i = 0; i < lokaler.length; i++) {
-      score[i] = [];
+      flowerData[i] = [];
       for (let j = 0; j < lokaler.length; j++) {
-        score[i][j] = 1;
+        flowerData[i][j] = 1;
       }
     }
   }
@@ -89,7 +78,7 @@ function draw() {
 
     for (let i = 0; i < numFlowers; i++){
       let loc = createVector(locations[i].x * width, locations[i].y * height);
-      flowers[i].update(loc, scaling, score[i][2], score[i][3]);
+      flowers[i].update(loc, scaling, flowerData[i][2], flowerData[i][3]);
       flowers[i].display(flowerImg);
     }
   }
@@ -98,7 +87,7 @@ function draw() {
 	    let loc = createVector(width / 2, height / 2);
 
       textSize(height * 0.05);
-    	flowers[i].update(loc, height * 0.6, score[i][2], score[i][3]);
+    	flowers[i].update(loc, height * 0.6, flowerData[i][2], flowerData[i][3]);
     	flowers[i].display(flowerImg);
 
     	backbutton.run();
