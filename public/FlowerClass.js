@@ -29,13 +29,14 @@ function Flower(iLocation, iScaling, iScore, iName) {
     text("Level "+ this.level, this.location.x, this.location.y + 0.06*height + this.scaling/2)
     smooth();
     strokeWeight(3);
+    stroke(0);
     rectMode(CORNERS);
     rect(this.location.x - this.scaling/2, 0.12*height+ this.location.y +this.scaling/2 ,this.location.x + this.scaling/2, 0.14*height+ this.location.y+this.scaling/2 );
     stroke(0, 230, 0);
     strokeWeight(scaling/40);
     line(4+this.location.x - this.scaling/2, 0.13*height + this.location.y + this.scaling/2, map(this.score, 0, 50 + this.level*50, 4+this.location.x- this.scaling/2, this.location.x - 4 + this.scaling/2), 0.13*height+ this.location.y + this.scaling/2);
+    noStroke();
 
-    
   }
 
   this.display = function(iImg) {
