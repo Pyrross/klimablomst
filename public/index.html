@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <title>Klima Blomsten — indeklimaets blomsterspil</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.dom.min.js"></script>
@@ -12,22 +13,24 @@
     <meta charset="utf-8" />
 
     <script>
-    // Initialize Firebase
-    var config = {
-      apiKey: "AIzaSyCI_InWdB8rCzHey_-QpvmGEigN5NH36NQ",
-      authDomain: "test-454bb.firebaseapp.com",
-      databaseURL: "https://test-454bb.firebaseio.com",
-      projectId: "test-454bb",
-      storageBucket: "test-454bb.appspot.com",
-      messagingSenderId: "947750622088"
-    };
-    firebase.initializeApp(config);
-    storage = firebase.storage().ref();
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCI_InWdB8rCzHey_-QpvmGEigN5NH36NQ",
+            authDomain: "test-454bb.firebaseapp.com",
+            databaseURL: "https://test-454bb.firebaseio.com",
+            projectId: "test-454bb",
+            storageBucket: "test-454bb.appspot.com",
+            messagingSenderId: "947750622088"
+        };
+        firebase.initializeApp(config);
+        storage = firebase.storage().ref();
     </script>
-  </head>
-  <body>
+</head>
+
+<body>
     <script src="sketch.js"></script>
     <script src="FlowerClass.js"></script>
     <script src="BackClass.js"></script>
-  </body>
+</body>
+
 </html>
