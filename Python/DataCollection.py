@@ -54,7 +54,6 @@ while True:  # Uendeligt loop som opdaterer databasen hvert femte minut (5 * 360
 
     # Måling af temp og humid
     humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
-    print('Temp={}*C  Humidity={}%'.format(temperature, humidity))
 
     change = calculateChange(temperature, CO2)
     score = score + change
@@ -65,4 +64,6 @@ while True:  # Uendeligt loop som opdaterer databasen hvert femte minut (5 * 360
         score = 0
 
     updateDatabase(score, level, temperature, humidity, change)
-    time.sleep(5*60)
+    print('Temp={}*C  Humidity={}%  Level={}  Score={}  Change={}'.format(temperature,
+                                                                          humidity, level, score, change))
+    time.sleep(5)
