@@ -88,7 +88,8 @@ function draw() {
 
       textSize(height * 0.05);
     	flowers[i].update(loc, height * 0.6, flowerData[i][2], flowerData[i][3]);
-    	flowers[i].display(flowerImg);
+    	flowers[i].displayOnly(flowerImg, flowerData[i][0]);
+
 
     	backbutton.run();
     }
