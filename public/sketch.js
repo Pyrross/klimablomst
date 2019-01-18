@@ -5,11 +5,11 @@ var locations = [];
 var rooms = ["3a1", "3a2"];
 var numFlowers;
 var flowerImg, backImg, scaling;
-var backbutton, site, FlameFetishFont;
+var backbutton, site, fontFlameFetish;
 
 //Funktion der hent tekstfont
 function preload() {
-    FlameFetishFont = loadFont("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/FlameFetish.ttf?alt=media&token=61d214fd-b336-4673-b4a8-d5ca09eabbee");
+    fontFlameFetish = loadFont("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/FlameFetish.ttf?alt=media&token=61d214fd-b336-4673-b4a8-d5ca09eabbee");
 }
 
 function setup() {
@@ -72,7 +72,7 @@ function draw() {
     if (site == 'main') {
         textSize(height * 0.09);
         textAlign(LEFT, TOP);
-        textFont(FlameFetishFont);
+        textFont(fontFlameFetish);
         text('Blomsterhaven', 30, 30);
         textFont('Arial');
         textSize(height * 0.03);
@@ -93,7 +93,6 @@ function draw() {
             flowers[i].update(loc, height * 0.6, flowerData[i]);
             flowers[i].displayOnly(flowerImg);
 
-
             //Viser tilbage knap objektet.
             backbutton.display();
         }
@@ -111,6 +110,31 @@ function mouseReleased() {
             print(flowers[i].name);
         }
     }
+}
+
+function keyPressed() {
+  if (keyCode == ESCAPE || keyCode == DOWN_ARROW) {
+    site = 'main';
+  }
+  else if (keyCode == LEFT_ARROW && site != flowers[0].name) {
+    var nextSite;
+    for (let i = 0; i < rooms.length; i++) {
+      if (flowers[i].name == rooms[i]) {
+        nextSite = i - 1;
+      }
+    }
+    site = flowers[nextSite].name;
+  }
+  else if (keyCode == RIGHT_ARROW && site != flowers[rooms.length - 1]) {
+    var nextSite;
+    for (let i = 0; i < rooms.length; i++) {
+      if (flowers[i].name == rooms[i]) {
+        nextSite = i + 1;
+        site = flowers[nextSite].name;
+        break;
+      }
+    }
+  }
 }
 
 function IsFresh(key) {
