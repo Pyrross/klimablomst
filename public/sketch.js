@@ -5,18 +5,18 @@ var locations = [];
 var rooms = ["3a1", "3a2"];
 var numFlowers;
 var flowerImg, backImg, scaling;
-var backbutton, site, FlameFetishFont;
+var backbutton, site, fontFlameFetish;
 
 //Funktion der hent tekstfont
 function preload() {
-    FlameFetishFont = loadFont("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/FlameFetish.ttf?alt=media&token=61d214fd-b336-4673-b4a8-d5ca09eabbee");
+    fontFlameFetish = loadFont("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/FlameFetish.ttf?alt=media&token=61d214fd-b336-4673-b4a8-d5ca09eabbee");
 }
 
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
   for (let i = 0; i < rooms.length; i++) {
     firebase.database().ref(rooms[i]).orderByKey().limitToLast(1).on('child_added', function(data) {
-    var string = data.val().temperature + ' ' + data.val().humidity + ' ' + data.val().score + ' ' + data.val().level + ' ' + data.key;
+    var string = data.val().temperature + ' ' + data.val().humidity + ' ' + data.val().score + ' ' + data.val().level + ' ' + data.key + ' ' + data.val().change;
     flowerData[i] = string.split(" ");
     });
   }
@@ -24,7 +24,7 @@ function setup() {
   if (typeof flowerData[0] == 'undefined') {
     for (let i = 0; i < rooms.length; i++) {
       flowerData[i] = [];
-      for (let j = 0; j < 5; j++) {
+      for (let j = 0; j < 6; j++) {
         flowerData[i][j] = 1;
       }
     }
@@ -41,7 +41,7 @@ function setup() {
         for (let i = 0; i < numFlowers; i++) {
             locations.push(createVector(((i % 5 + 1)) / 6, (ceil((i + 1) / 5) + 0.5) / 5));
             let loc = createVector(locations[i].x * width, locations[i].y * height);
-            flowers.push(new Flower(loc, scaling, 50, rooms[i]));
+            flowers.push(new Flower(loc, scaling, rooms[i], flowerData[i]));
         }
     } else {
         scaling = height / (1 + numFlowers);
@@ -49,7 +49,7 @@ function setup() {
         for (let i = 0; i < numFlowers; i++) {
             locations.push(createVector((i + 1) / (numFlowers + 1), 1 / 2));
             let loc = createVector(locations[i].x * width, locations[i].y * height);
-            flowers.push(new Flower(loc, scaling, 50, rooms[i]));
+            flowers.push(new Flower(loc, scaling, rooms[i], flowerData[i]));
         }
     }
 
@@ -72,7 +72,7 @@ function draw() {
     if (site == 'main') {
         textSize(height * 0.09);
         textAlign(LEFT, TOP);
-        textFont(FlameFetishFont);
+        textFont(fontFlameFetish);
         text('Blomsterhaven', 30, 30);
         textFont('Arial');
         textSize(height * 0.03);
@@ -80,7 +80,7 @@ function draw() {
         //Visualiser blomster
         for (let i = 0; i < numFlowers; i++) {
             let loc = createVector(locations[i].x * width, locations[i].y * height);
-            flowers[i].update(loc, scaling, flowerData[i][2], flowerData[i][3]);
+            flowers[i].update(loc, scaling, flowerData[i]);
             flowers[i].display(flowerImg);
         }
     }
@@ -88,11 +88,10 @@ function draw() {
     for (let i = 0; i < flowers.length; i++) {
         if (site == flowers[i].name) {
             let loc = createVector(width / 2, height / 3);
-
+            textAlign(LEFT, TOP);
             textSize(height * 0.05);
-            flowers[i].update(loc, height * 0.6, flowerData[i][2], flowerData[i][3]);
-            flowers[i].displayOnly(flowerImg, flowerData[i][0]);
-
+            flowers[i].update(loc, height * 0.6, flowerData[i]);
+            flowers[i].displayOnly(flowerImg);
 
             //Viser tilbage knap objektet.
             backbutton.display();
@@ -113,10 +112,36 @@ function mouseReleased() {
     }
 }
 
+function keyPressed() {
+  if (keyCode == ESCAPE || keyCode == DOWN_ARROW) {
+    site = 'main';
+  }
+  else if (keyCode == LEFT_ARROW && site != flowers[0].name) {
+    var nextSite;
+    for (let i = 0; i < rooms.length; i++) {
+      if (flowers[i].name == rooms[i]) {
+        nextSite = i - 1;
+      }
+    }
+    site = flowers[nextSite].name;
+  }
+  else if (keyCode == RIGHT_ARROW && site != flowers[rooms.length - 1]) {
+    var nextSite;
+    for (let i = 0; i < rooms.length; i++) {
+      if (flowers[i].name == rooms[i]) {
+        nextSite = i + 1;
+        site = flowers[nextSite].name;
+        break;
+      }
+    }
+  }
+}
+
 function IsFresh(key) {
   var now = new Date();
   if (typeof key == 'string') {
-    if ((parseInt(key.slice(0,4)) == now.getFullYear()) && (parseInt(key.slice(4,6)) == now.getMonth() + 1) && (parseInt(key.slice(6,8)) == now.getDate()) && (parseInt(key.slice(8,10)) == now.getHours() + 1)) {
+    if ((parseInt(key.slice(0,4)) == now.getFullYear()) && (parseInt(key.slice(4,6)) == now.getMonth() + 1) && (parseInt(key.slice(6,8)) == now.getDate()) && (parseInt(key.slice(8,10)) + 1 == now.getHours())) {
+      print("tampen brænder");
       if (now.getMinutes() - parseInt(key.slice(10,11)) < 30) {
         return true;
       }
