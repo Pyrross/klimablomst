@@ -1,6 +1,6 @@
 //Klasse der håndterer tilbage knappen
 function Backbutton(iImg) {
-    this.location = createVector(30, 30);
+    this.location = createVector(5, 5);
     this.img = iImg;
 
     //Funktion - tjekker om musen er henover knappen. Vektorafstand bruges da det ern en cirkulær figur.
@@ -15,8 +15,8 @@ function Backbutton(iImg) {
         noTint();
         imageMode(CENTER);
         if (this.register()) {
-            image(this.img, this.location.x, this.location.y, window.innerWidth / 25, window.innerWidth / 25);
-        } else image(this.img, this.location.x + Resize(69), this.location.y + Resize(69), Resize(69), Resize(69));
+            image(this.img, this.location.x + Resize(80) / 2, this.location.y + Resize(80) / 2, Resize(100), Resize(100));
+        } else image(this.img, this.location.x + Resize(80) / 2, this.location.y + Resize(80) / 2, Resize(80), Resize(80));
     }
 }
 
@@ -26,6 +26,6 @@ function Distance(a, b) {
 }
 
 function Resize(maxDim) {
-  // antager tilnærmelsesvis kvadratisk billededimension
-  print(maxDim / Math.max(window.innerWidth, window.innerHeight));
+  // antager tilnærmelsesvis kvadratisk billededimension. Ville være mere hensigtsmæssigt med en aftangede eksponentialfunktion.
+  return Math.min(window.innerWidth, window.innerHeight) * maxDim / 1920;
 }
