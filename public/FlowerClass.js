@@ -48,11 +48,10 @@ function Flower(iLocation, iScaling, iName, iData) {
   this.display = function(iImg) {
     tint(50, map(this.data[2], 0, 100, 50, 255), 50, 255);
     imageMode(CENTER);
-
-        //Er musen over blomsterne? Hvis ja, highlight blomsten.
-        if (this.register()) {
-            image(iImg, this.location.x, this.location.y, this.scaling + 5, this.scaling + 5);
-        } else image(iImg, this.location.x, this.location.y, this.scaling, this.scaling);
+    //Er musen over blomsterne? Hvis ja, highlight blomsten.
+    if (this.register()) {
+        image(iImg, this.location.x, this.location.y, this.scaling + 5, this.scaling + 5);
+    } else image(iImg, this.location.x, this.location.y, this.scaling, this.scaling);
 
     textAlign(CENTER,[TOP]);
     text(this.name, this.location.x, this.location.y + 10 + this.scaling / 2);
