@@ -77,7 +77,6 @@ function draw() {
         textFont('Arial');
         textSize(height * 0.03);
 
-
         //Visualiser blomster
         for (let i = 0; i < numFlowers; i++) {
             let loc = createVector(locations[i].x * width, locations[i].y * height);

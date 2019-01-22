@@ -52,20 +52,20 @@ function Flower(iLocation, iScaling, iName, iData) {
       pop();
       textSize(0.08*height);
       textAlign(CENTER,CENTER);
-      text(this.data[5], this.location.x + this.scaling*2.7 /8, 0.13*height + this.location.y + this.scaling/2 );
+      text(this.data[5], this.location.x + this.scaling * 2.7 / 8, 0.13 * height + this.location.y + this.scaling / 2);
 } else if (this.data[5]<0){
       imageMode(CENTER);
       tint(240, 50, 50);
-      image(arrowImg, this.location.x + this.scaling * 3.5 / 8, 0.13 * height + this.location.y + this.scaling/2,  this.scaling*1/8, this.scaling*1/8);
+      image(arrowImg, this.location.x + this.scaling * 3.5 / 8, 0.13 * height + this.location.y + this.scaling / 2,  this.scaling * 1 / 8, this.scaling * 1 / 8);
       textSize(0.08*height);
       textAlign(CENTER,CENTER);
-      text(abs(this.data[5]), this.location.x + this.scaling*2.7 /8, 0.13*height + this.location.y + this.scaling/2 );
+      text(abs(this.data[5]), this.location.x + this.scaling*2.7 / 8, 0.13 * height + this.location.y + this.scaling / 2);
     }
 
   }
 
   this.display = function(iImg) {
-    tint(50, map(this.data[2], 0, 100, 50, 255), 50, 255);
+    tint(map(this.data[2], 0, 50 + this.data[3] * 50, 50, 50 + (this.data[3]-1)%5 * 50) , 50, map(this.data[2], 0, 50 + this.data[3] * 50, 50, 250 - (this.data[3] - 1)%5 * 50));
     imageMode(CENTER);
 
         //Er musen over blomsterne? Hvis ja, highlight blomsten.
