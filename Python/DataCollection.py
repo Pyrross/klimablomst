@@ -18,11 +18,14 @@ pin = 2
 # hvor credentials er auth og credentials er til at administrere brugere,
 # db og storage er til at administrere queries og data på databasenself.
 creds = credentials.Certificate('Data/Creds.json')
-bruger = firebase_admin.initialize_app(creds, {'databaseURL': 'https://test-454bb.firebaseio.com'})
+user = firebase_admin.initialize_app(creds, {'databaseURL': 'https://test-454bb.firebaseio.com'})
 
 root = db.reference()
 # Tilføjer ny blomst hvis ikke den eksisterer i forvejen.
-klient = root.child(name)
+client = root.child(name)
+
+snapshot = client.limit_To_Last().get()
+for 
 
 
 def calculateChange(temperature, CO2):  # Funktion - skal scoren ændres?
