@@ -46,7 +46,7 @@ def calculateChange(temperature, CO2):  # Funktion - skal scoren ændres?
     return change
 
 
-def updateDatabase(score, level, temperature, humidity, change):  # Funtion opdaterer database.
+def updateDatabase(score, level, temperature, humidity, change, CO2):  # Funtion opdaterer database.
     # Update database
     client.child(strftime("%Y%m%d%H%M%S", gmtime())).set({
         'temperature': temperature,
@@ -70,7 +70,7 @@ while True:  # Uendeligt loop som opdaterer databasen hvert femte minut (5 * 360
         level = level + 1
         score = 0
 
-    updateDatabase(score, level, temperature, humidity, change)
-    print('Temp={}*C  Humidity={}%  Level={}  Score={}  Change={}'.format(temperature,
-                                                                          humidity, level, score, change))
+    updateDatabase(score, level, temperature, humidity, change, CO2)
+    print('Temp={}*C  Humidity={}%  Level={}  Score={}  Change={}  CO2={}'.format(temperature,
+                                                                                  humidity, level, score, change, CO2))
     time.sleep(5)
