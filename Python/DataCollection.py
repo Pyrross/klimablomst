@@ -24,8 +24,12 @@ root = db.reference()
 # Tilføjer ny blomst hvis ikke den eksisterer i forvejen.
 client = root.child(name)
 
-snapshot = client.limit_To_Last().get()
-for 
+snapshot = client.order_by_key().limit_to_last(1).get()
+for key, val in snapshot.items():
+    level = val.get("level")
+    score = val.get("score")
+
+print(level, score)
 
 
 def calculateChange(temperature, CO2):  # Funktion - skal scoren ændres?
@@ -44,7 +48,7 @@ def calculateChange(temperature, CO2):  # Funktion - skal scoren ændres?
 
 def updateDatabase(score, level, temperature, humidity, change):  # Funtion opdaterer database.
     # Update database
-    klient.child(strftime("%Y%m%d%H%M%S", gmtime())).set({
+    client.child(strftime("%Y%m%d%H%M%S", gmtime())).set({
         'temperature': temperature,
         'humidity': humidity,
         'score': score,
@@ -54,7 +58,6 @@ def updateDatabase(score, level, temperature, humidity, change):  # Funtion opda
 
 
 while True:  # Uendeligt loop som opdaterer databasen hvert femte minut (5 * 3600 sekunder)
-
     # Måling af temp og humid
     humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
 
