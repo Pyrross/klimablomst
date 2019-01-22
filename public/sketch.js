@@ -2,6 +2,7 @@ var database, storage;
 var flowerData = [];
 var flowers = [];
 var locations = [];
+var flowerHistory = [];
 var rooms = ["3a1", "3a2"];
 var numFlowers;
 var flowerImg, backImg, scaling, arrowImg;
@@ -16,14 +17,16 @@ function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
   for (let i = 0; i < rooms.length; i++) {
     firebase.database().ref(rooms[i]).orderByKey().limitToLast(1).on('child_added', function(data) {
-    var string = data.val().temperature + ' ' + data.val().humidity + ' ' + data.val().score + ' ' + data.val().level + ' ' + data.key + ' ' + data.val().change;
+    var string = data.val().temperature + ' ' + data.val().humidity + ' ' + data.val().score + ' ' + data.val().level + ' ' + data.key + ' ' + data.val().change + ' ' + data.val().CO2;
     flowerData[i] = string.split(" ");
+    flowerHistory[i].push(flowerData[i]);
     });
   }
   // Da den første hentning af firebase-data er udefineret benyttes et if-statement til at undvige fejl
   if (typeof flowerData[0] == 'undefined') {
     for (let i = 0; i < rooms.length; i++) {
       flowerData[i] = [];
+      flowerHistory[i] = []
       for (let j = 0; j < 6; j++) {
         flowerData[i][j] = 1;
       }
@@ -59,6 +62,7 @@ function setup() {
 }
 
 function draw() {
+  print(flowerHistory);
     //Opdatering af vinduet således at det passer til skærmstørrelsen
     createCanvas(window.innerWidth, window.innerHeight);
     background(250);
