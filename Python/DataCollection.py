@@ -53,7 +53,8 @@ def updateDatabase(score, level, temperature, humidity, change):  # Funtion opda
         'humidity': humidity,
         'score': score,
         'level': level,
-        'change': change
+        'change': change,
+        'CO2': CO2
     })
 
 
