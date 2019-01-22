@@ -4,7 +4,7 @@ var flowers = [];
 var locations = [];
 var rooms = ["3a1", "3a2"];
 var numFlowers;
-var flowerImg, backImg, scaling;
+var flowerImg, backImg, scaling, arrowImg;
 var backbutton, site, fontFlameFetish;
 
 //Funktion der hent tekstfont
@@ -33,7 +33,7 @@ function setup() {
     //Hent filer fra online arkiv
     flowerImg = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/testBlomst.jpg?alt=media&token=6033f3af-80f1-4a57-88a4-75af12524357");
     backImg = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/tilbage.png?alt=media&token=351e1dd3-ee90-44ae-963c-c0f104034546");
-
+    arrowImg = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/pihl.png?alt=media&token=a71cbedc-bb11-4354-a604-61406a2ff618&fbclid=IwAR30B0QTeWFOvAirK2AgGD71qpG00KeA7f2skIldkFHO9OIzUeTC8THIMqk");
     //Opret en blomst per klasse
     numFlowers = rooms.length;
     if (numFlowers > 5) {
@@ -76,6 +76,7 @@ function draw() {
         text('Blomsterhaven', 30, 30);
         textFont('Arial');
         textSize(height * 0.03);
+
 
         //Visualiser blomster
         for (let i = 0; i < numFlowers; i++) {

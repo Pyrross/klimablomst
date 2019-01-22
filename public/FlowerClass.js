@@ -33,25 +33,45 @@ function Flower(iLocation, iScaling, iName, iData) {
     rectMode(CORNERS);
     rect(this.location.x - this.scaling / 2, 0.12 * height + this.location.y + this.scaling / 2 , this.location.x + this.scaling / 4, 0.14 * height + this.location.y + this.scaling / 2);
     stroke(0, 230, 0);
-    strokeWeight(scaling / 40);
-    line(4 + this.location.x - this.scaling/2, 0.13 *height + this.location.y + this.scaling / 2, map(this.data[2], 0, 50 + this.data[3] * 50, 4 +this.location.x - this.scaling / 2, this.location.x - 4 + this.scaling / 4), 0.13 * height + this.location.y + this.scaling / 2);
+    strokeWeight(scaling/40);
+    line(4+this.location.x - this.scaling/2, 0.13*height + this.location.y + this.scaling/2, map(this.data[2], 0, 50 + this.data[3]*50, 4+this.location.x- this.scaling/2, this.location.x - 4 + this.scaling/4), 0.13*height+ this.location.y + this.scaling/2);
     noStroke();
 
     //tilføj symboler efter ændring
-    if(!IsFresh(this.data[4])){
-      textSize(0.10 * height);
+    if(!IsFresh(this.data[4]) || this.data[5] == 0){
+      textSize(0.10*height);
       textAlign(CENTER,CENTER);
-      text("—", this.location.x + this.scaling * 3 / 8, 0.13 * height + this.location.y + this.scaling / 2);
+      text("—", this.location.x + this.scaling*3/8, 0.13*height + this.location.y + this.scaling/2 );
+    } else if (this.data[5]>0){
+      imageMode(CENTER);
+      tint(50, 240, 50);
+      push();
+      translate(this.location.x + this.scaling * 3.5 / 8, 0.13 * height + this.location.y + this.scaling*0.96/2);
+      rotate(PI);
+      image(arrowImg, 0, 0,  this.scaling*1/8, -this.scaling*1/8);
+      pop();
+      textSize(0.08*height);
+      textAlign(CENTER,CENTER);
+      text(this.data[5], this.location.x + this.scaling*2.7 /8, 0.13*height + this.location.y + this.scaling/2 );
+} else if (this.data[5]<0){
+      imageMode(CENTER);
+      tint(240, 50, 50);
+      image(arrowImg, this.location.x + this.scaling * 3.5 / 8, 0.13 * height + this.location.y + this.scaling/2,  this.scaling*1/8, this.scaling*1/8);
+      textSize(0.08*height);
+      textAlign(CENTER,CENTER);
+      text(abs(this.data[5]), this.location.x + this.scaling*2.7 /8, 0.13*height + this.location.y + this.scaling/2 );
     }
+
   }
 
   this.display = function(iImg) {
     tint(50, map(this.data[2], 0, 100, 50, 255), 50, 255);
     imageMode(CENTER);
-    //Er musen over blomsterne? Hvis ja, highlight blomsten.
-    if (this.register()) {
-        image(iImg, this.location.x, this.location.y, this.scaling + 5, this.scaling + 5);
-    } else image(iImg, this.location.x, this.location.y, this.scaling, this.scaling);
+
+        //Er musen over blomsterne? Hvis ja, highlight blomsten.
+        if (this.register()) {
+            image(iImg, this.location.x, this.location.y, this.scaling + 5, this.scaling + 5);
+        } else image(iImg, this.location.x, this.location.y, this.scaling, this.scaling);
 
     textAlign(CENTER,[TOP]);
     text(this.name, this.location.x, this.location.y + 10 + this.scaling / 2);
