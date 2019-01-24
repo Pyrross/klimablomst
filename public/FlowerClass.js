@@ -20,8 +20,8 @@ function Flower(iLocation, iScaling, iName, iData) {
         this.data = iData;
     }
 
-  this.displayOnly = function(iImg) {
-    this.display(iImg);
+  this.displayOnly = function() {
+    this.display();
     text("Level " + this.data[3], this.location.x, this.location.y + 0.06 * height + this.scaling / 2)
     this.displayData();
   }
@@ -72,7 +72,7 @@ function Flower(iLocation, iScaling, iName, iData) {
     }
   }
 
-  this.display = function(iImg) {
+  this.display = function() {
     imageMode(CENTER);
     var num = floor(10 * this.data[2] / (50 + this.data[3] * 50));
     tint(150 + (map(this.data[2], 0, 50 + this.data[3] * 50, 0, 105)), 150 + (map(this.data[2], 0, 50 + this.data[3] * 50, 0, 105)), 100 + (map(this.data[2], 0, 50 + this.data[3] * 50, 0, 155)));

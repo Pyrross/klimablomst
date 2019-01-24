@@ -84,7 +84,7 @@ function draw() {
         for (let i = 0; i < numFlowers; i++) {
             let loc = createVector(locations[i].x * width, locations[i].y * height);
             flowers[i].update(loc, scaling, flowerData[i]);
-            flowers[i].display(flowerImg);
+            flowers[i].display();
         }
     }
 
@@ -94,7 +94,7 @@ function draw() {
             textAlign(LEFT, TOP);
             textSize(height * 0.05);
             flowers[i].update(loc, height * 0.6, flowerData[i]);
-            flowers[i].displayOnly(flowerImg);
+            flowers[i].displayOnly();
 
             //Viser tilbage knap objektet.
             backbutton.display();
