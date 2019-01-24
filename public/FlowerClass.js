@@ -73,12 +73,17 @@ function Flower(iLocation, iScaling, iName, iData) {
   }
 
   this.display = function(iImg) {
-    tint(map(this.data[2], 0, 50 + this.data[3] * 50, 50, 50 + (this.data[3]-1)%5 * 50) , 50, map(this.data[2], 0, 50 + this.data[3] * 50, 50, 250 - (this.data[3] - 1)%5 * 50));
     imageMode(CENTER);
-        //Er musen over blomsterne? Hvis ja, highlight blomsten.
-        if (this.register()) {
-            image(iImg, this.location.x, this.location.y, this.scaling + 5, this.scaling + 5);
-        } else image(iImg, this.location.x, this.location.y, this.scaling, this.scaling);
+    var num = floor(10 * this.data[2] / (50 + this.data[3] * 50));
+    tint(255, 255, 150 + (map(this.data[2], 0, 50 + this.data[3] * 50, 0, 105)));
+    //Er musen over blomsterne? Hvis ja, highlight blomsten.
+    if (this.register()) {
+        image(stemImages[num], this.location.x, this.location.y, this.scaling + 5, this.scaling + 5);
+    } else image(stemImages[num], this.location.x, this.location.y, this.scaling, this.scaling);
+    tint(map(this.data[2], 0, 50 + this.data[3] * 50, 50, 50 + (this.data[3]-1)%5 * 50) , 50, map(this.data[2], 0, 50 + this.data[3] * 50, 50, 250 - (this.data[3] - 1)%5 * 50));
+    if (this.register()) {
+        image(flowerImages[num], this.location.x, this.location.y, this.scaling + 5, this.scaling + 5);
+    } else image(flowerImages[num], this.location.x, this.location.y, this.scaling, this.scaling);
 
     textAlign(CENTER,[TOP]);
     text(this.name, this.location.x, this.location.y + 10 + this.scaling / 2);
