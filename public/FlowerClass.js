@@ -34,7 +34,9 @@ function Flower(iLocation, iScaling, iName, iData) {
     rect(this.location.x - this.scaling / 2, 0.12 * height + this.location.y + this.scaling / 2 , this.location.x + this.scaling / 4, 0.14 * height + this.location.y + this.scaling / 2);
     stroke(0, 230, 0);
     strokeWeight(scaling/40);
-    line(4 + this.location.x - this.scaling / 2, 0.13 * height + this.location.y + this.scaling/2, map(this.data[2], 0, 50 + this.data[3] * 50, 4 + this.location.x - this.scaling / 2, this.location.x - 4 + this.scaling / 4), 0.13 * height + this.location.y + this.scaling / 2);
+    if(this.data[2]>0){
+      line(4 + this.location.x - this.scaling / 2, 0.13 * height + this.location.y + this.scaling/2, map(this.data[2], 0, 50 + this.data[3] * 50, 4 + this.location.x - this.scaling / 2, this.location.x - 4 + this.scaling / 4), 0.13 * height + this.location.y + this.scaling / 2);
+    }
     noStroke();
     textSize(22);
     text("Score: " + this.data[2] + "/" + (50 + parseInt(this.data[3]) * 50), this.location.x, this.location.y + 0.16 * height + this.scaling / 2);
