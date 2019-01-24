@@ -75,7 +75,7 @@ function Flower(iLocation, iScaling, iName, iData) {
   this.display = function(iImg) {
     imageMode(CENTER);
     var num = floor(10 * this.data[2] / (50 + this.data[3] * 50));
-    tint(255, 255, 150 + (map(this.data[2], 0, 50 + this.data[3] * 50, 0, 105)));
+    tint(150 + (map(this.data[2], 0, 50 + this.data[3] * 50, 0, 105)), 150 + (map(this.data[2], 0, 50 + this.data[3] * 50, 0, 105)), 100 + (map(this.data[2], 0, 50 + this.data[3] * 50, 0, 155)));
     //Er musen over blomsterne? Hvis ja, highlight blomsten.
     if (this.register()) {
         image(stemImages[num], this.location.x, this.location.y, this.scaling + 5, this.scaling + 5);
