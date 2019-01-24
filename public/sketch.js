@@ -165,25 +165,25 @@ function getImages() {
   backImg = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/tilbage.png?alt=media&token=351e1dd3-ee90-44ae-963c-c0f104034546");
   arrowImg = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/pihl.png?alt=media&token=a71cbedc-bb11-4354-a604-61406a2ff618&fbclid=IwAR30B0QTeWFOvAirK2AgGD71qpG00KeA7f2skIldkFHO9OIzUeTC8THIMqk");
   // hent blomster-billeder
-  flowerImages[0] = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/blomst%2FBlomst_1-640x640.png?alt=media&token=d124b445-a144-40fe-8c00-0bb063e25f19");
-  flowerImages[1] = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/blomst%2FBlomst_2-640x640.png?alt=media&token=dcb0c466-2e46-4d74-9118-b8f00392bf23");
-  flowerImages[2] = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/blomst%2FBlomst_3-640x640.png?alt=media&token=89df246c-b503-4e96-81fb-ec1f63b503d4");
-  flowerImages[3] = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/blomst%2FBlomst_4-640x640.png?alt=media&token=50e7303e-af87-4987-95c3-487dd69a27f69");
-  flowerImages[4] = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/blomst%2FBlomst_5-640x640.png?alt=media&token=1f550e3c-126d-4667-8c5e-7630681cad78");
-  flowerImages[5] = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/blomst%2FBlomst_6-640x640.png?alt=media&token=6eb0be56-dca0-4349-a02f-88739b0cd33d");
-  flowerImages[6] = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/blomst%2FBlomst_7-640x640.png?alt=media&token=e65d49b9-2ed9-4c4c-bd01-5f223e24b381");
-  flowerImages[7] = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/blomst%2FBlomst_8-640x640.png?alt=media&token=8e10ff94-ed36-4561-98c5-93b5a22787bd");
-  flowerImages[8] = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/blomst%2FBlomst_9-640x640.png?alt=media&token=4265fb4b-4d75-4db3-98ad-b2680706b04d");
-  flowerImages[9] = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/blomst%2FBlomst_10-640x640.png?alt=media&token=7d7c6bd8-6bef-44fd-a878-8ba2aa149659");
+  flowerImages[0] = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/blomst%2FBlomst_1.png?alt=media&token=37ac1270-7287-45cb-8413-3e64ce84afb4");
+  flowerImages[1] = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/blomst%2FBlomst_2.png?alt=media&token=0f6121ad-679b-41ad-adcf-fc2ace8a28ad");
+  flowerImages[2] = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/blomst%2FBlomst_3.png?alt=media&token=0d31649d-5a01-4ad5-b817-fe3df0e812ce");
+  flowerImages[3] = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/blomst%2FBlomst_4.png?alt=media&token=a190538f-2fc1-4b64-ad16-947ec3329f28");
+  flowerImages[4] = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/blomst%2FBlomst_5.png?alt=media&token=b1347359-4eb6-4bf6-8122-a83751153f76");
+  flowerImages[5] = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/blomst%2FBlomst_6.png?alt=media&token=a7416ba5-d2f1-48f9-88e4-fe017c366e1a");
+  flowerImages[6] = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/blomst%2FBlomst_7.png?alt=media&token=1e2ea7de-b8a2-43fc-b3f4-92d95994735a");
+  flowerImages[7] = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/blomst%2FBlomst_8.png?alt=media&token=829c55b7-1649-4aba-885c-892430c67c8d");
+  flowerImages[8] = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/blomst%2FBlomst_9.png?alt=media&token=8c44872f-6b77-4c01-b14a-5bc0a880d17a");
+  flowerImages[9] = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/blomst%2FBlomst_10.png?alt=media&token=f2316c19-16c1-40a8-8800-de5bb7bebeb9");
   // hent stilk-billeder
-  stemImages[0] = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/blomst%2Fstilk_1-640x640.png?alt=media&token=2b2c5b2d-65ff-48cc-9318-5585ef65a5e0");
-  stemImages[1] = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/blomst%2Fstilk_2-640x640.png?alt=media&token=af9c7e29-b6ab-4306-bab9-a9d745063d53");
-  stemImages[2] = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/blomst%2Fstilk_3-640x640.png?alt=media&token=ed763763-b411-4a5b-b6f8-5346eafdd293");
-  stemImages[3] = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/blomst%2Fstilk_4-640x640.png?alt=media&token=139bf028-a855-4e4f-a82a-41463e8ebbb4");
-  stemImages[4] = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/blomst%2Fstilk_5-640x640.png?alt=media&token=c8c112d3-3d37-4d79-8baa-eda36569e149");
-  stemImages[5] = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/blomst%2Fstilk_6-640x640.png?alt=media&token=e0cec64e-4e0b-43d5-9d7f-00edb2e5b93d");
-  stemImages[6] = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/blomst%2Fstilk_7-640x640.png?alt=media&token=6ee032bb-eb8a-4ea2-ab91-6c891e12034f");
-  stemImages[7] = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/blomst%2Fstilk_8-640x640.png?alt=media&token=e50432fa-a5a8-4300-9e8d-10963d8ebafe");
-  stemImages[8] = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/blomst%2Fstilk_9-640x640.png?alt=media&token=92867cb2-55ef-4b33-a1db-cf4c497831b2");
-  stemImages[9] = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/blomst%2Fstilk_10-640x640.png?alt=media&token=9bca6ed6-e7ed-434a-9a28-668c98fbb6ea");
+  stemImages[0] = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/blomst%2Fstilk_1.png?alt=media&token=278a0261-794b-4dca-b89b-569b22bcc0b9");
+  stemImages[1] = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/blomst%2Fstilk_2.png?alt=media&token=7f985cde-7396-48d9-880c-75190c7ee1a0");
+  stemImages[2] = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/blomst%2Fstilk_3.png?alt=media&token=93bf4ba2-8358-4234-89c6-0e40c8df35a6");
+  stemImages[3] = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/blomst%2Fstilk_4.png?alt=media&token=e98cc1d8-0e0a-4dba-b34b-2cd1473450a0");
+  stemImages[4] = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/blomst%2Fstilk_5.png?alt=media&token=82a531e5-a98b-4555-89f2-22cf1cd7de43");
+  stemImages[5] = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/blomst%2Fstilk_6.png?alt=media&token=f3aaa9ed-9612-46f8-be3f-8e0b94f5e2a7");
+  stemImages[6] = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/blomst%2Fstilk_7.png?alt=media&token=c3470dc0-bd32-4bfa-b0ba-a7fa122ddc8d");
+  stemImages[7] = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/blomst%2Fstilk_8.png?alt=media&token=8da41ddc-110f-44a1-8479-fe467283b6bf");
+  stemImages[8] = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/blomst%2Fstilk_9.png?alt=media&token=e41e7406-53ba-49ae-b513-9df06220742e");
+  stemImages[9] = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/blomst%2Fstilk_10.png?alt=media&token=361295ab-f88e-46e4-a64a-ab5b870146cb");
 }
