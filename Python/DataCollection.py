@@ -5,7 +5,7 @@ from time import gmtime, strftime
 import firebase_admin
 from firebase_admin import auth, credentials, db, storage
 
-name = "3a1"
+name = "3a3"
 score = 0
 level = 1
 CO2 = 0
@@ -25,9 +25,10 @@ root = db.reference()
 client = root.child(name)
 
 snapshot = client.order_by_key().limit_to_last(1).get()
-for key, val in snapshot.items():
-    level = val.get("level")
-    score = val.get("score")
+if snapshot is not None:
+    for key, val in snapshot.items():
+        level = val.get("level")
+        score = val.get("score")
 
 print(level, score)
 
