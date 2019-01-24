@@ -40,13 +40,14 @@ function Flower(iLocation, iScaling, iName, iData) {
     noStroke();
     textSize(22);
     text("Score: " + this.data[2] + "/" + (50 + parseInt(this.data[3]) * 50), this.location.x, this.location.y + 0.16 * height + this.scaling / 2);
-
-    textAlign(LEFT);
-    text("Temperatur: " + this.data[0] + "°C", (this.location.x - (this.scaling + 5) / 2) / 2 - 43, this.location.y * 0.5);
-    text("Fugtighed: " + this.data[1] + "%", (this.location.x - (this.scaling + 5) / 2) / 2 - 43, this.location.y * 0.666);
-    text("CO : " + this.data[1] + "%", (this.location.x - (this.scaling + 5) / 2) / 2 - 43, this.location.y * 0.832);
-    textSize(10);
-    text("2", (this.location.x - (this.scaling + 5) / 2) / 2 - 10, this.location.y * 0.832 + 12);
+    if (window.innerWidth / window.innerHeight > 1.8) {
+      textAlign(LEFT);
+      text("Temperatur: " + this.data[0] + "°C", (this.location.x - (this.scaling + 5) / 2) / 2 - 43, this.location.y * 0.5);
+      text("Fugtighed: " + this.data[1] + "%", (this.location.x - (this.scaling + 5) / 2) / 2 - 43, this.location.y * 0.666);
+      text("CO : " + this.data[1] + "%", (this.location.x - (this.scaling + 5) / 2) / 2 - 43, this.location.y * 0.832);
+      textSize(10);
+      text("2", (this.location.x - (this.scaling + 5) / 2) / 2 - 10, this.location.y * 0.832 + 12);
+    }
     //tilføj symboler efter ændring
     textAlign(CENTER);
     if(!IsFresh(this.data[4]) || this.data[5] == 0) {

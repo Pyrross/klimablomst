@@ -17,9 +17,8 @@ function Backbutton(iImg) {
     this.display = function() {
         noTint();
         imageMode(CENTER);
-        if (this.register()) {
-            image(this.img, this.location.x, this.location.y, window.innerWidth / 25, window.innerWidth / 25);
-        } else image(this.img, this.location.x, this.location.y, window.innerWidth / 28, window.innerWidth / 28);
+        if (this.register()) image(this.img, this.location.x, this.location.y, 60 - 1920 / window.innerWidth * 2, 60 - 1920 / window.innerWidth * 2);
+        else image(this.img, this.location.x, this.location.y, 42 - 1920 / window.innerWidth * 2, 42 - 1920 / window.innerWidth * 2);
     }
 }
 
