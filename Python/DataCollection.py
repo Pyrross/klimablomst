@@ -4,6 +4,7 @@ import time
 from time import gmtime, strftime
 import firebase_admin
 from firebase_admin import auth, credentials, db, storage
+from Adafruit_CCS811 import Adafruit_CCS811
 
 name = "3a3"
 score = 0
@@ -13,6 +14,13 @@ CO2 = 0
 # Sensor type og pin den er forbundet til
 sensor = Adafruit_DHT.DHT11
 pin = 2
+
+# Co2 Sensor
+ccs = Adafruit_CCS811()
+while not ccs.available():
+    pass
+temp = ccs.calculateTemperature()
+ccs.tempOffset = temp - 25.0
 
 # Credentials til firebase,
 # hvor credentials er auth og credentials er til at administrere brugere,
@@ -62,6 +70,12 @@ def updateDatabase(score, level, temperature, humidity, change, CO2):  # Funtion
 while True:  # Uendeligt loop som opdaterer databasen hvert femte minut (5 * 3600 sekunder)
     # Måling af temp og humid
     humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
+
+    if ccs.available():
+        temp = ccs.calculateTemperature()
+        if not ccs.readData():
+            CO2 = ccs.geteCO2()
+            print "CO2: ", ccs.geteCO2(), "ppm, TVOC: ", ccs.getTVOC(), " temp: ", temp
 
     change = calculateChange(temperature, CO2)
     score = score + change
