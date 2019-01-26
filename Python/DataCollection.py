@@ -6,14 +6,14 @@ import firebase_admin
 from firebase_admin import auth, credentials, db, storage
 from Adafruit_CCS811 import Adafruit_CCS811
 
-name = "3a3"
+name = "3a2"
 score = 0
 level = 1
 CO2 = 0
 
 # Sensor type og pin den er forbundet til
 sensor = Adafruit_DHT.DHT11
-pin = 2
+pin = 4
 
 # Co2 Sensor
 ccs = Adafruit_CCS811()
