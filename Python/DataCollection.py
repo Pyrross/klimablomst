@@ -68,30 +68,35 @@ def updateDatabase(score, level, temperature, humidity, change, CO2):  # Funtion
 
 
 while True:  # Uendeligt loop som opdaterer databasen hvert femte minut (5 * 3600 sekunder)
-    # Måling af temp og humid
-    humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
 
-    # Read Co2 level
-    if ccs.available():
-        temp = ccs.calculateTemperature()
-        if not ccs.readData():
-            CO2 = ccs.geteCO2()
-            print "CO2: ", ccs.geteCO2(), "ppm, TVOC: ", ccs.getTVOC(), " temp: ", temp
-        else:
-            print "ERROR!"
-            while(1):
-                pass
+    try:
+        # Måling af temp og humid
+        humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
 
-    # Calculate change
-    change = calculateChange(temperature, CO2)
-    score = score + change
-    if (score < 0):
-        score = 0
-    if (score >= 50 + level * 50):
-        level = level + 1
-        score = 0
+        # Read Co2 level
+        if ccs.available():
+            temp = ccs.calculateTemperature()
+            if not ccs.readData():
+                CO2 = ccs.geteCO2()
+                print "CO2: ", ccs.geteCO2(), "ppm, TVOC: ", ccs.getTVOC(), " temp: ", temp
+            else:
+                print "ERROR!"
+                while(1):
+                    pass
 
-    updateDatabase(score, level, temperature, humidity, change, CO2)
-    print('Temp={}*C  Humidity={}%  Level={}  Score={}  Change={}  CO2={}'.format(temperature,
-                                                                                  humidity, level, score, change, CO2))
-    time.sleep(5)
+        # Calculate change
+        change = calculateChange(temperature, CO2)
+        score = score + change
+        if (score < 0):
+            score = 0
+        if (score >= 50 + level * 50):
+            level = level + 1
+            score = 0
+
+        updateDatabase(score, level, temperature, humidity, change, CO2)
+        print('Temp={}*C  Humidity={}%  Level={}  Score={}  Change={}  CO2={}'.format(temperature,
+                                                                                      humidity, level, score, change, CO2))
+        time.sleep(5)
+    except as e:
+        print(e)
+        time.sleeep(60)
