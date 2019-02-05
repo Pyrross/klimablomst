@@ -43,7 +43,7 @@ print(level, score)
 
 def calculateChange(temperature, CO2):  # Funktion - skal scoren ændres?
     change = 0
-    if (temperature <= 25 and temperature > 20 and temperature != 0):
+    if (temperature <= 25 and temperature >= 20 and temperature != 0):
         change = change + 1
     if (temperature > 25 or temperature < 20 and temperature != 0):
         change = change - 1
