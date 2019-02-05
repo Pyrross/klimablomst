@@ -99,4 +99,4 @@ while True:  # Uendeligt loop som opdaterer databasen hvert femte minut (5 * 360
         time.sleep(5)
     except Exception as e:
         print(e)
-        time.sleeep(60)
+        time.sleep(60)
