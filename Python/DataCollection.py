@@ -48,9 +48,9 @@ def calculateChange(temperature, CO2):  # Funktion - skal scoren ændres?
     if (temperature > 25 or temperature < 20 and temperature != 0):
         change = change - 1
 
-    if (CO2 < 600 and CO2 != 0):
+    if (CO2 < 800 and CO2 != 0):
         change = change + 1
-    if (CO2 > 600):
+    if (CO2 > 800):
         change = change - 1
     return change
 
