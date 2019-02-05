@@ -97,6 +97,6 @@ while True:  # Uendeligt loop som opdaterer databasen hvert femte minut (5 * 360
         print('Temp={}*C  Humidity={}%  Level={}  Score={}  Change={}  CO2={}'.format(temperature,
                                                                                       humidity, level, score, change, CO2))
         time.sleep(5)
-    except as e:
+    except Exception as e:
         print(e)
         time.sleeep(60)
