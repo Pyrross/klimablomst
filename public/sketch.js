@@ -12,7 +12,7 @@ var backbutton, site, fontFlameFetish;
 
 //Funktion der hent tekstfont
 function preload() {
-    fontFlameFetish = loadFont("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/FlameFetish.ttf?alt=media&token=61d214fd-b336-4673-b4a8-d5ca09eabbee");
+      fontFlameFetish = loadFont("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/FlameFetish.ttf?alt=media&token=61d214fd-b336-4673-b4a8-d5ca09eabbee");
 }
 
 function setup() {
@@ -161,7 +161,6 @@ function TimeOfMeasurement(key) {
 }
 
 function getImages() {
-  flowerImg = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/testBlomst.jpg?alt=media&token=6033f3af-80f1-4a57-88a4-75af12524357");
   backImg = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/tilbage.png?alt=media&token=351e1dd3-ee90-44ae-963c-c0f104034546");
   arrowImg = loadImage("https://firebasestorage.googleapis.com/v0/b/test-454bb.appspot.com/o/pihl.png?alt=media&token=a71cbedc-bb11-4354-a604-61406a2ff618&fbclid=IwAR30B0QTeWFOvAirK2AgGD71qpG00KeA7f2skIldkFHO9OIzUeTC8THIMqk");
   // hent blomster-billeder
