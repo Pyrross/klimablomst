@@ -44,13 +44,13 @@ function Flower(iLocation, iScaling, iName, iData) {
       textAlign(LEFT);
       text("Temperatur: " + this.data[0] + "°C", (this.location.x - (this.scaling + 5) / 2) / 2 - 43, this.location.y * 0.5);
       text("Fugtighed: " + this.data[1] + "%", (this.location.x - (this.scaling + 5) / 2) / 2 - 43, this.location.y * 0.666);
-      text("CO : " + this.data[1] + "%", (this.location.x - (this.scaling + 5) / 2) / 2 - 43, this.location.y * 0.832);
+      text("CO : " + this.data[6] + " ppm", (this.location.x - (this.scaling + 5) / 2) / 2 - 43, this.location.y * 0.832);
       textSize(10);
       text("2", (this.location.x - (this.scaling + 5) / 2) / 2 - 10, this.location.y * 0.832 + 12);
     }
     //tilføj symboler efter ændring
     textAlign(CENTER);
-    if(!IsFresh(this.data[4]) || this.data[5] == 0) {
+    if (!IsFresh(this.data[4]) || this.data[5] == 0) {
       textSize(0.10 * height);
       textAlign(CENTER,CENTER);
       text("—", this.location.x + this.scaling * 3 / 8, 0.13 * height + this.location.y + this.scaling / 2);

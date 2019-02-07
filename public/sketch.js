@@ -143,8 +143,8 @@ function keyPressed() {
 function IsFresh(key) {
   var now = new Date();
   if (typeof key == 'string') {
-    if ((parseInt(key.slice(0,4)) == now.getFullYear()) && (parseInt(key.slice(4,6)) == now.getMonth() + 1) && (parseInt(key.slice(6,8)) == now.getDate()) && (parseInt(key.slice(8,10)) + 1 == now.getHours())) {
-      if (now.getMinutes() - parseInt(key.slice(10,11)) < 30) {
+    if ((parseInt(key.slice(0,4)) == now.getFullYear()) && (parseInt(key.slice(4,6)) == now.getMonth() + 1) && (parseInt(key.slice(6,8)) == now.getDate()) && (abs(parseInt(key.slice(8,10)) + 1 - now.getHours()) <= 1)) {
+      if (now.getMinutes() - parseInt(key.slice(10,12)) < 30) {
         return true;
       }
       else return false;
