@@ -22,9 +22,7 @@ while not ccs.available():
 temp = ccs.calculateTemperature()
 ccs.tempOffset = temp - 25.0
 
-# Credentials til firebase,
-# hvor credentials er auth og credentials er til at administrere brugere,
-# db og storage er til at administrere queries og data på databasenself.
+# Credentials til firebase
 creds = credentials.Certificate('Data/Creds.json')
 user = firebase_admin.initialize_app(creds, {'databaseURL': 'https://test-454bb.firebaseio.com'})
 
@@ -32,6 +30,7 @@ root = db.reference()
 # Tilføjer ny blomst hvis ikke den eksisterer i forvejen.
 client = root.child(name)
 
+# Hent den nyeste kopi af level og score
 snapshot = client.order_by_key().limit_to_last(1).get()
 if snapshot is not None:
     for key, val in snapshot.items():
@@ -73,7 +72,7 @@ while True:  # Uendeligt loop som opdaterer databasen hvert femte minut (5 * 360
         # Måling af temp og humid
         humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
 
-        # Read Co2 level
+        # Læser Co2 niveau
         if ccs.available():
             temp = ccs.calculateTemperature()
             if not ccs.readData():
@@ -84,7 +83,7 @@ while True:  # Uendeligt loop som opdaterer databasen hvert femte minut (5 * 360
                 while(1):
                     pass
 
-        # Calculate change
+        # Beregn level og nulstil score
         change = calculateChange(temperature, CO2)
         score = score + change
         if (score < 0):
